@@ -79,10 +79,10 @@
     <Compile Include="MatchTimer\RimWorldUPTT.cs" />
     <Compile Include="MatchTimer\TimerDisplayLocations.cs" />
     <Compile Include="MatchTimer\TimerFormatEnum.cs" />
-    <Compile Include="ModSettings\ShouldDisplayMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RimBuzzer.cs" />
     <Compile Include="RimBuzzerMain.cs" />
-    <Compile Include="RimBuzzerSettings.cs" />
+    <Compile Include="RimBuzzer_Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BuzzerUnpause\" />
