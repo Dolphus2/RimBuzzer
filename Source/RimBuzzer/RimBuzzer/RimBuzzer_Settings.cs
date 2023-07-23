@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Verse;
 using UnityEngine;
 using RimWorld;
@@ -6,15 +8,18 @@ using System.Runtime;
 using System.Reflection.Emit;
 using System;
 using Verse.Noise;
+using System.Reflection;
+using Dolphus.RimBuzzer.MatchTimer;
 
 
 namespace Dolphus.RimBuzzer
 {
+    /// <summary>
+    /// The settings object of this mod. I have chosen to have everything here and give this class a DoSettingsWindowContents method, that is called in the main mod class.
+    /// </summary>
     public class RimBuzzer_Settings : ModSettings
     {
-        /// <summary>
-        /// The three settings our mod has.
-        /// </summary>
+
         public static bool _enabled = true; // static is good here because there is only one instance of this class. It can therefore be treated as static. The field here
         public static bool Enabled // The property used to access the field.
         {
@@ -28,6 +33,27 @@ namespace Dolphus.RimBuzzer
                 _enabled = value;
             }
         }
+        // Settings Variables
+        public static ClockReadoutFormatEnum ClockReadoutFormat = ClockReadoutFormatEnum.FULL_24HR;
+        public static TimerDisplayLocationEnum TimerDisplayLocation = TimerDisplayLocationEnum.REALTIMECLOCK;
+        public static TimerFormatEnum TimerFormat = TimerFormatEnum.STOPWATCH;
+        
+        public static int CountdownMinutes = 20;
+        public static int PauseAfter = CountdownMinutes;
+        public static int PlaySoundAfter = CountdownMinutes;
+
+        public static int NumberOfColorGradiants = 3; // enum like in healthHediff. // Do three manually because otherwise I have to store them in array, create class and all that. Look at that later maybe.
+        // Appear on one row. After X minutes, bool flash, Color picker (like in RPG inventory)
+        public static int GradientMinutes;
+        public static bool flash;
+        // To be iterated upon
+
+
+        public static bool BuzzerEnabled = false;
+        public static int BuzzerLastsSeconds = 3;
+
+
+
         public static bool exampleBool;
         public static float exampleFloat = 200f;
         public static int exampleInt = 20;
@@ -61,13 +87,28 @@ namespace Dolphus.RimBuzzer
             Listing_Standard listingStandard = new Listing_Standard();
             listingStandard.Begin(inRect); // .LeftPartPixels(250f).TopPart(0.6f)
             listingStandard.GapLine();
-            //listingStandard.ColumnWidth = 250f;
-            //listingStandard.ColumnWidth -= 30f;
 
             bool localEnabled = Enabled;
             listingStandard.CheckboxLabeled("settings_IsEnabled".Translate(), ref localEnabled, "settings_IsEnabled_tooltip".Translate());
             Enabled = localEnabled; // and this is where the property is important. This way, the program reacts when Enables is set to value.
-            listingStandard.GapLine();
+            
+            if (Enabled)
+            {
+                listingStandard.ButtonTextLabeled("settings_enumClockDisplayFormat".Translate(), $"settings_enumClockDisplayFormat_ButtonLabel.{ClockReadoutFormat}".Translate(), tooltip: "settings_enumClockDisplayFormat_tooltip".Translate());
+                Find.WindowStack.Add(new FloatMenu(Enum.GetValues(typeof(ClockReadoutFormatEnum)) // The float menu when clicking the button.
+                   .Cast<ClockReadoutFormatEnum>()
+                   .Select(ReadoutFormat => new FloatMenuOption(                                        // Lambda expression
+                        $"settings_enumClockDisplayFormat_ButtonLabel.{ClockReadoutFormat}".Translate(), () => ClockReadoutFormat = ReadoutFormat))
+                   .ToList()));
+
+            }
+
+
+
+            //listingStandard.ColumnWidth = 250f;
+            //listingStandard.ColumnWidth -= 30f;
+
+
 
             listingStandard.CheckboxLabeled("settings_exampleBool".Translate(), ref exampleBool, "settings_exampleBool_tooltip".Translate());
 
@@ -90,5 +131,38 @@ namespace Dolphus.RimBuzzer
 
         }
     }
+
+    public enum ClockReadoutFormatEnum
+    {
+        SIMPLE_24HR = 0,
+        SIMPLE_12HR,
+        FULL_24HR,
+        FULL_12HR
+    }
+
+    public enum TimerDisplayLocationEnum // Delete solo files later
+    {
+        HIDDEN = 0,
+        NOTIFICATION,
+        REALTIMECLOCK
+    }
+
+    public enum TimerFormatEnum
+    {
+        STOPWATCH = 0,
+        COUNTDOWN
+    }
+
+    public enum NumberOfColorGradiantsEnum // Do this in a better way. Probably just slot in numbers (maybe as strings) and save the hassle of using .translate()
+    {
+        One = 0,
+        Two,
+        Three,
+        Four
+    }
+
+
+
 }
+
 
