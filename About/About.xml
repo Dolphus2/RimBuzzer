@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModMetaData>
+    <name>RimBuzzer</name>
+    <author>Dolphus</author>
+    <packageId>Dolphus.RimBuzzer.0.1</packageId>
+    <description>A countdown and buzzer intended for Rimworld PVP. Situated in the control panel in the bottom left, clicking this button pauses the game and does a 3 second cound down with an audible buzzer. 
+    Useful for when Rimworld PVP teams are rearing to go but don't know when the game is actually starting because they are in different comms channels.</description>
+    <supportedVersions>
+        <li>1.4</li>
+    </supportedVersions>
+	<modDependencies> 
+		<li>
+			<packageId>UnlimitedHugs.HugsLib</packageId>
+			<displayName>HugsLib</displayName>
+			<downloadUrl>https://github.com/UnlimitedHugs/RimworldHugsLib/releases/latest</downloadUrl>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/818773962</steamWorkshopUrl>
+		</li>
+	</modDependencies>
+	<loadAfter>
+		<li>UnlimitedHugs.HugsLib</li>
+	</loadAfter>
+</ModMetaData>
+<!--
+When adding a preview photo
+
+Must be called Preview.png
+
+Should be
+640x360
+
+Must Not Be Larger then 1MB in size
+ -->
+

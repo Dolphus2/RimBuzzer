@@ -1,0 +1,2 @@
+It is probably fastest and easiest to keep using the RimWorld UPTT object, and then just calculate the count down from that.
+Yeah, most definitely for all the multiplayer stuff and idemptotence.
