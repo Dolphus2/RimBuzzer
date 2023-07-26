@@ -83,6 +83,7 @@
     <Compile Include="RimBuzzer.cs" />
     <Compile Include="RimBuzzerMain.cs" />
     <Compile Include="RimBuzzer_Settings.cs" />
+    <Compile Include="Tools.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BuzzerUnpause\" />
