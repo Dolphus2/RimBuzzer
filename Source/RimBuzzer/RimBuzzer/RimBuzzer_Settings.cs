@@ -95,11 +95,14 @@ namespace Dolphus.RimBuzzer
             //customColors ??= new List<Color>(); // null-coalescing assignment
             if (customColors == null)
                 customColors = new List<Color>(); 
-
             customColorMaterials = customColors.Select(color => (Material)null).ToList();
 
-
-
+            Scribe_Collections.Look(ref costumColorFlash, "costumColorFlash"); // We can't set a default, so we have to manually handle the case of null references with null-coalescing assignments.
+            if (costumColorFlash == null)
+                costumColorFlash = new List<bool>();
+            Scribe_Collections.Look(ref costumColorMinutes, "costumColorMinutes");
+            if (costumColorMinutes == null)
+                costumColorMinutes = new List<int>();
         }
 
         public static Vector2 scrollPosition = Vector2.zero;
@@ -154,7 +157,7 @@ namespace Dolphus.RimBuzzer
                             $"settings_enumClockDisplayFormat_ButtonLabel.{timerFormat}".Translate(), () => timerFormat = Format))
                         .ToList()));
                 }
-                // Now for the one that is ass. I can't find any non Hugslib mod settings that do this. 
+                // Now for the one that is ass. I can't find any non Hugslib mod settings that do this, so I built my own.
                 //rect = list.GetRect(28f);
                 if (timerFormat == TimerFormatEnum.COUNTDOWN)
                 {
@@ -174,17 +177,9 @@ namespace Dolphus.RimBuzzer
 
 
             list.NewColumn();
-            //list.Gap();
-            //list.IntegerPlusMinusCheckbox("BuzzerLastsSeconds", ref buzzerLastsSeconds, ref buzzerEnabled, valMin: 1, valMax: 10);
-
-            //list.CheckboxLabeled("settings_BuzzerEnabled".Translate(), ref BuzzerEnabled, "settings_BuzzerEnabled_tooltip".Translate());
-            //if (BuzzerEnabled)
-            //{
-            //    list.Gap(standardGap);
-            //    list.IntegerPlusMinus("BuzzerLastsSeconds", ref BuzzerLastsSeconds, valMin: 1, valMax: 10);
-            //}
-
-            // list.GapLine(standardGap);
+            list.Gap();
+            list.IntegerPlusMinusCheckbox("BuzzerLastsSeconds", ref buzzerLastsSeconds, ref buzzerEnabled, valMin: 1, valMax: 10);
+            list.GapLine(standardGap);
 
 
             // Color list from Range Finder by Andreas Pardeike. The man, the myth, the legend.
@@ -198,13 +193,14 @@ namespace Dolphus.RimBuzzer
             const float padding = 20f;
             var colors = customColors;
             var colorMaterials = customColorMaterials;
-            //var colorFlash = costumColorFlash;
-            //var colorMinutes = costumColorMinutes;
+            var colorFlash = costumColorFlash;
+            var colorMinutes = costumColorMinutes;
 
 
             var listRect = list.GetRect(inRect.height - list.CurHeight - 24 - 12 - padding); 
-            var innerWidth = listRect.width - (colors.Count > 16 ? 16 : 0); // Make space for the scrollbar when there are a lot of colors.
-            var innerHeight = colors.Count == 0 ? 100 : colors.Count * (24 + 6) + 24; // same height unless we need to expand it for a lot of colors.
+            var innerWidth = listRect.width - (colors.Count > 7 ? 16 : 0); // Make space for the scrollbar when there are a lot of colors.
+            var innerHeight = colors.Count == 0 ? 100 : colors.Count * ((24 + 6) + (24 + 6)) + 24; // This was the culprit. Discovering that this was causing widgets to veer off the the right took long.
+                                                                                                   // 24 for the first button, 24 + 6 for color + space and 24 + 6 for int + space.
             var innerRect = new Rect(0f, 0f, innerWidth, innerHeight);
             Widgets.BeginScrollView(listRect, ref scrollPosition, innerRect, true);
             var innerList = new Listing_Standard();
@@ -216,23 +212,25 @@ namespace Dolphus.RimBuzzer
                 colors.Add(newColor);
                 colorMaterials.Add(MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, newColor));
 
-                //bool newColorFlash = false;
-                //colorFlash.Add(newColorFlash);
-                //int newColorMinutes = countdownMinutes;
-                //colorMinutes.Add(newColorMinutes);
+                bool newColorFlash = false;
+                colorFlash.Add(newColorFlash);
+                int newColorMinutes = countdownMinutes;
+                colorMinutes.Add(newColorMinutes);
             }
 
             for (var i = 0; i < colors.Count; i++) // Will only run if colors.Count >= 1, so there are colors.  
             {
-                innerList.Gap(6);
-                var rect = innerList.GetRect(24); 
-
+                innerList.Gap(6); //6
+                var rect = innerList.GetRect(24); //24
+                // innerList.Gap(24 + 6);
+                Log.Message("Rect position: " + rect.position.ToString());
                 if (Widgets.ButtonImage(rect.RightPartPixels(24f), Widgets.CheckboxOffTex))
                 {
                     colors.RemoveAt(i);
                     colorMaterials.RemoveAt(i);
-                    //colorFlash.RemoveAt(i);
-                    //colorMinutes.RemoveAt(i);
+
+                    colorFlash.RemoveAt(i);
+                    colorMinutes.RemoveAt(i);
                     if (colors.NullOrEmpty())
                         break;
                     if (i > 0)
@@ -255,19 +253,14 @@ namespace Dolphus.RimBuzzer
                 if (colorMaterials[i] == null || colors[i] != oldColor)
                     colorMaterials[i] = MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, colors[i]);
 
-                // innerList.Gap(6);
-                
-                // Either move the rect down or make a new rect.
-                // rect.
-                //var rect2 = innerList.GetRect(24);
-
-                //bool tempColorFlash = colorFlash[i]; // My IntegerPlusMinusCheckbox has to take and int and bool by reference, so I create new temporary variables I can pass by reference.
-                //int tempColorMinutes = colorMinutes[i];
-                //innerList.IntegerPlusMinusCheckbox("ColorGradientMinutes", ref tempColorMinutes, ref tempColorFlash, valMin: 1, valMax: 60);
-                //colorFlash[i] = tempColorFlash;
-                //colorMinutes[i] = tempColorMinutes;
-
-                // The idea is to use the list and get bools and ints corrosponding to each color. 
+                // Color flash and color minutes. Man this was a pain.
+                innerList.Gap(6);
+                var rectBelow = innerList.GetRect(24);
+                bool tempColorFlash = colorFlash[i]; // My IntegerPlusMinusCheckbox has to take and int and bool by reference, so I create new temporary variables I can pass by reference.
+                int tempColorMinutes = colorMinutes[i];
+                Tools.IntegerPlusMinusCheckbox(rectBelow, "ColorGradientMinutes", ref tempColorMinutes, ref tempColorFlash, valMin: 1, valMax: 60);
+                colorFlash[i] = tempColorFlash;
+                colorMinutes[i] = tempColorMinutes;
             }
             if (colors.Count == 0)
             {
