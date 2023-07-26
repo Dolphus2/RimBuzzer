@@ -49,7 +49,7 @@ namespace Dolphus.RimBuzzer
         // Settings
 
         //Enums
-        public static SettingHandle<ClockReadoutFormatEnum> SettingHandle_ClockDisplayFormat { get; private set; }
+        public static SettingHandle<ClockReadoutFormatEnum3> SettingHandle_ClockDisplayFormat { get; private set; }
 
         public static SettingHandle<TimerDisplayLocationEnum> SettingHandle_TimerDisplayLocation { get; private set; }
 
@@ -156,7 +156,7 @@ namespace Dolphus.RimBuzzer
         /// </summary>
         private void PrepareModSettingHandles()
         {
-            SettingHandle_ClockDisplayFormat = Settings.GetHandle("enumClockDisplayFormat", "RTCP_DisplayFormatChoice_title".Translate(), "RTCP_DisplayFormatChoice_descr".Translate(), ClockReadoutFormatEnum.SIMPLE_24HR, null, "ClockReadoutFormat_");
+            SettingHandle_ClockDisplayFormat = Settings.GetHandle("enumClockDisplayFormat", "RTCP_DisplayFormatChoice_title".Translate(), "RTCP_DisplayFormatChoice_descr".Translate(), ClockReadoutFormatEnum3.SIMPLE_24HR, null, "ClockReadoutFormat_");
             SettingHandle_TimerDisplayLocation = Settings.GetHandle("enumTimerDisplayLocation", "UPTT_DisplayLocation_title".Translate(), "UPTT_DisplayLocation_desc".Translate(), TimerDisplayLocationEnum.NOTIFICATION, null, "TimerDisplayLocation_");
             SettingHandle_TimerFormat = Settings.GetHandle("enumTimerFormat", "UPTT_Format_title".Translate(), "UPTT_Format_desc".Translate(), TimerFormatEnum.STOPWATCH, null, "TimerFormat_");
 

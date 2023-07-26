@@ -69,7 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MatchTimer\ClockReadoutFormatEnum.cs" />
+    <Compile Include="MatchTimer\ClockReadoutFormatEnum3.cs" />
     <Compile Include="HelloWorld.cs" />
     <Compile Include="MatchTimer\Alert_MatchTimer.cs" />
     <Compile Include="MatchTimer\ClockReadoutStringBuilder.cs" />
