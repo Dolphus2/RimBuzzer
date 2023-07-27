@@ -18,7 +18,7 @@ namespace Dolphus.RimBuzzer
     {
 
         // Settings Variables. Column 1
-        public static ClockReadoutFormatEnum ClockReadoutFormat = ClockReadoutFormatEnum.FULL_24HR;
+        public static ClockReadoutFormatEnum ClockReadoutFormat = ClockReadoutFormatEnum.SIMPLE_24HR;
         public static bool BetterMessagePlacement = true;
 
         public static bool UPTT_enabled = true; // static is good here because there is only one instance of this class. It can therefore be treated as static. The field here
@@ -34,9 +34,10 @@ namespace Dolphus.RimBuzzer
                 UPTT_enabled = value;
             }
         }
-        public static TimerDisplayLocationEnum timerDisplayLocation = TimerDisplayLocationEnum.REALTIMECLOCK;
+        public static TimerDisplayLocationEnum timerDisplayLocation = TimerDisplayLocationEnum.REALTIMECLOCK; 
         public static bool timerUseHours = false;
-        public static bool timerUseMiliseconds = true;
+        public static bool timerUseMilliseconds = true;
+        public static bool timerAppearMinimalist = false;
         public static TimerFormatEnum timerFormat = TimerFormatEnum.STOPWATCH;
         
         public static int countdownMinutes = 20; // Appear if countdown
@@ -47,10 +48,16 @@ namespace Dolphus.RimBuzzer
         public static bool buzzerEnabled = false;
         public static int  buzzerLastsSeconds = 3;
 
-        public List<Color> customColors = new List<Color>();
-        public List<Material> customColorMaterials = new List<Material>();
-        public List<bool> costumColorFlash = new List<bool>();
-        public List<int> costumColorMinutes = new List<int>();
+        public static List<Color> customColors = new List<Color>();
+        public static List<Material> customColorMaterials = new List<Material>();
+        public static List<bool> costumColorPulse = new List<bool>();
+        public static List<int> costumColorMinutes = new List<int>();
+
+        // Useful fields not available in the menu.
+        public static List<int> costumColorMinutesIdx => (costumColorMinutes.Count == 0 ? new List<int>() : Tools.argsort(costumColorMinutes));
+            
+            
+            //costumColorMinutes.Count == 0 ? new List<int>() : Tools.argsort(costumColorMinutes, out costumColorMinutesIdx);
         // Maybe c-type array instead, so I have the references
 
 
@@ -71,13 +78,14 @@ namespace Dolphus.RimBuzzer
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look<ClockReadoutFormatEnum>(ref ClockReadoutFormat, "ClockReadoutFormat", ClockReadoutFormatEnum.FULL_24HR);
+            Scribe_Values.Look<ClockReadoutFormatEnum>(ref ClockReadoutFormat, "ClockReadoutFormat", ClockReadoutFormatEnum.SIMPLE_24HR);
             Scribe_Values.Look<bool>(ref BetterMessagePlacement, "BetterMessagePlacement", true);
             Scribe_Values.Look<bool>(ref UPTT_enabled, "UPTT_enabled", true);
             // Show conditionally
             Scribe_Values.Look<TimerDisplayLocationEnum>(ref timerDisplayLocation, "TimerDisplayLocation", TimerDisplayLocationEnum.REALTIMECLOCK);
             Scribe_Values.Look<bool>(ref timerUseHours, "TimerUseHours", true);
-            Scribe_Values.Look<bool>(ref timerUseMiliseconds, "TimerUseMiliseconds", true);
+            Scribe_Values.Look<bool>(ref timerUseMilliseconds, "TimerUseMiliseconds", true);
+            Scribe_Values.Look<bool>(ref timerAppearMinimalist, "timerAppearMinimalist", false);
             Scribe_Values.Look<TimerFormatEnum>(ref timerFormat, "TimerFormat", TimerFormatEnum.STOPWATCH);
 
             Scribe_Values.Look<int>(ref countdownMinutes, "CountdownMinutes", 20);
@@ -95,9 +103,9 @@ namespace Dolphus.RimBuzzer
                 customColors = new List<Color>(); 
             customColorMaterials = customColors.Select(color => (Material)null).ToList();
 
-            Scribe_Collections.Look(ref costumColorFlash, "costumColorFlash"); // We can't set a default, so we have to manually handle the case of null references with null-coalescing assignments.
-            if (costumColorFlash == null)
-                costumColorFlash = new List<bool>();
+            Scribe_Collections.Look(ref costumColorPulse, "costumColorPulse"); // We can't set a default, so we have to manually handle the case of null references with null-coalescing assignments.
+            if (costumColorPulse == null)
+                costumColorPulse = new List<bool>();
             Scribe_Collections.Look(ref costumColorMinutes, "costumColorMinutes");
             if (costumColorMinutes == null)
                 costumColorMinutes = new List<int>();
@@ -123,7 +131,7 @@ namespace Dolphus.RimBuzzer
                         $"settings_enumClockDisplayFormat_ButtonLabel.{ReadoutFormat}".Translate(), () => ClockReadoutFormat = ReadoutFormat))
                     .ToList()));
             }
-            list.GapLine(standardGap);
+            list.Gap(standardGap);
             list.CheckboxLabeled("settings_BetterMessagePlacement".Translate(), ref BetterMessagePlacement, "settings_BetterMessagePlacement_tooltip".Translate());
             list.Gap(standardGap);
             bool localUPTTEnabled = UPTTEnabled;
@@ -138,13 +146,15 @@ namespace Dolphus.RimBuzzer
                     Find.WindowStack.Add(new FloatMenu(Enum.GetValues(typeof(TimerDisplayLocationEnum)) // The float menu when clicking the button.
                         .Cast<TimerDisplayLocationEnum>()
                         .Select(DisplayLocation => new FloatMenuOption(                                        // Lambda expression
-                            $"settings_enumClockDisplayFormat_ButtonLabel.{DisplayLocation}".Translate(), () => timerDisplayLocation = DisplayLocation))
+                            $"settings_enumTimerDisplayLocation_ButtonLabel.{DisplayLocation}".Translate(), () => timerDisplayLocation = DisplayLocation))
                         .ToList()));
                 }
-                list.GapLine(standardGap);
+                list.Gap(standardGap);
                 list.CheckboxLabeled("settings_TimerUseHours".Translate(), ref timerUseHours, "settings_TimerUseHours_tooltip".Translate());
                 list.Gap(standardGap);
-                list.CheckboxLabeled("settings_TimerUseMiliseconds".Translate(), ref timerUseMiliseconds, "settings_TimerUseMiliseconds_tooltip".Translate());
+                list.CheckboxLabeled("settings_TimerUseMiliseconds".Translate(), ref timerUseMilliseconds, "settings_TimerUseMiliseconds_tooltip".Translate());
+                list.Gap(standardGap);
+                list.CheckboxLabeled("settings_TimerAppearMinimalist".Translate(), ref timerAppearMinimalist, "settings_TimerAppearMinimalist_tooltip".Translate());
                 list.Gap(standardGap);
                 if (list.ButtonTextLabeled("settings_enumTimerFormat".Translate(), $"settings_enumTimerFormat_ButtonLabel.{timerFormat}".Translate(), tooltip: "settings_enumTimerFormat_tooltip".Translate()))
                 {
@@ -192,7 +202,7 @@ namespace Dolphus.RimBuzzer
                 const float padding = 20f;
                 var colors = customColors;
                 var colorMaterials = customColorMaterials;
-                var colorFlash = costumColorFlash;
+                var colorFlash = costumColorPulse;
                 var colorMinutes = costumColorMinutes;
 
 
@@ -207,7 +217,8 @@ namespace Dolphus.RimBuzzer
 
                 if (Widgets.ButtonText(innerList.GetRect(24), "AddColor".Translate()))
                 {
-                    var newColor = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value); // Learn from this. I can make a variable and pass it by reference
+                    var newColor = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value); // Learn from this. I can make a variable and pass it by reference.
+                                                                                                                            // It is quite important that it is initialized it seems. I have null references somewhere.
                     colors.Add(newColor);
                     colorMaterials.Add(MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, newColor));
 
@@ -222,7 +233,7 @@ namespace Dolphus.RimBuzzer
                     innerList.Gap(6); //6
                     var rect = innerList.GetRect(24); //24
                                                       // innerList.Gap(24 + 6);
-                    Log.Message("Rect position: " + rect.position.ToString());
+                    // Log.Message("Rect position: " + rect.position.ToString());
                     if (Widgets.ButtonImage(rect.RightPartPixels(24f), Widgets.CheckboxOffTex))
                     {
                         colors.RemoveAt(i);
@@ -257,7 +268,7 @@ namespace Dolphus.RimBuzzer
                     var rectBelow = innerList.GetRect(24);
                     bool tempColorFlash = colorFlash[i]; // My IntegerPlusMinusCheckbox has to take and int and bool by reference, so I create new temporary variables I can pass by reference.
                     int tempColorMinutes = colorMinutes[i];
-                    Tools.IntegerPlusMinusCheckbox(rectBelow, "ColorGradientMinutes", ref tempColorMinutes, ref tempColorFlash, valMin: 1, valMax: 60, fieldOnlyIfCheck : false);
+                    Tools.IntegerPlusMinusCheckbox(rectBelow, "ColorGradientMinutes", ref tempColorMinutes, ref tempColorFlash, valMin: 0, valMax: 60, fieldOnlyIfCheck : false);
                     colorFlash[i] = tempColorFlash;
                     colorMinutes[i] = tempColorMinutes;
                 }
@@ -297,29 +308,6 @@ namespace Dolphus.RimBuzzer
         STOPWATCH = 0,
         COUNTDOWN
     }
-
-    public enum NumberOfColorGradiantsEnum // Do this in a better way. Probably just slot in numbers (maybe as strings) and save the hassle of using .translate()
-    {
-        One = 0,
-        Two,
-        Three,
-        Four
-    }
-
-    /// <summary>
-    /// A set of useful value constraints for use with SettingHandle
-    /// </summary> 
-
-    //public static SettingHandle.ValueIsValid IntRangeValidator(int min, int max)
-    //{
-    //    return str => {
-    //        int parsed;
-    //        if (!int.TryParse(str, out parsed)) return false;
-    //        return parsed >= min && parsed <= max;
-    //    };
-    //}
-
-
 }
 
 

@@ -17,7 +17,7 @@ namespace Dolphus.RimBuzzer.MatchTimer
         /// </summary>
         public TimeSpan ElapsedTime => TimeSpan.FromSeconds(accumulation); //RimworldUPTT has an attribute called ElapsedTime. When you try to set something
         // equal to ElapsedTime, it sets it equal to the lambda expression, which is the actual elapsed time. Very clever.
-        // You can access ElapsedTime but not accumulation. Nice. 
+        // You can access ElapsedTime but not accumulation. Nice. (I had just had never programmed in c# before when I wrote that. Writing this is a week later).
 
         /// <summary>
         /// Internal variable to store how much time has passed since whatever moment we start counting.
@@ -26,6 +26,7 @@ namespace Dolphus.RimBuzzer.MatchTimer
 
         public RimWorldUPTT() // Constructor. When this object is intialized, accumulation is set to 0. 
         {
+            Log.Error("RimWorldUPTT constructor");
             accumulation = 0;
         }
 
@@ -40,7 +41,7 @@ namespace Dolphus.RimBuzzer.MatchTimer
             StringBuilder builder = new StringBuilder();
             // Hours: displayed in full.
             // Supposedly matches don't go on for more than 24 hours. 
-            if (RimBuzzerMain.TimerShouldIncludeHours)
+            if (RimBuzzer_Settings.timerUseHours)
             {
                 builder.AppendFormat("{0:00}:", (int)ElapsedTime.TotalHours);
             }
@@ -49,7 +50,7 @@ namespace Dolphus.RimBuzzer.MatchTimer
             builder.AppendFormat("{0:00}:{1:00}", ElapsedTime.Minutes, ElapsedTime.Seconds);
             // Milliseconds
             // Policy is to display 2 d.p. of milliseconds (centiseconds I guess)
-            if (RimBuzzerMain.TimerShouldIncludeMilliseconds)
+            if (RimBuzzer_Settings.timerUseMilliseconds)
             {
                 builder.AppendFormat(":{0:00}", ElapsedTime.Milliseconds/10);
             }
@@ -63,7 +64,7 @@ namespace Dolphus.RimBuzzer.MatchTimer
         /// <param name="amount"></param>
         public void AccumulateTime(float amount)
         {
-            accumulation += amount; 
+            accumulation += amount; // This stupid and needs to be fixed 
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using RimWorld.BaseGen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,39 @@ namespace Dolphus.RimBuzzer.MatchTimer
         /// <summary>
         /// Defines the time interval that the time-based color gradient is scaled on. Currently set to 5 hours.
         /// </summary>
-        // private readonly int maxTimeForGradience = 5 * RimWorldTickingTime.TicksPerHour;
 
         private const float PulseFreq = 0.5f;
         private const float PulseAmpCritical = 0.6f;
-        private readonly TimeSpan maxTimeForGradient = new TimeSpan(5, 0, 0);
-        private TaggedString explanation = new TaggedString("UPTT_TrackerAlert_descr".Translate());
+        private TaggedString explanation = new TaggedString("UPTT_TrackerAlert_tooltip".Translate());
+
+        // private List<int> sortedColorMinutes = Tools.argsort(costumColorMinutes, ref )
+
+
+        //public List<int> colorIdx = RimBuzzer_Settings.costumColorMinutes
+        //    .Select((x, i) => (Value: x, OriginalIndex: i))
+        //    .OrderBy(x => x.Value)
+        //    .ToList();
+
+        //public static List<Color> customColors = new List<Color>();
+        //public static List<Material> customColorMaterials = new List<Material>();
+        //public static List<bool> costumColorFlash = new List<bool>();
+        //public static List<int> costumColorMinutes = new List<int>();
+
+
+        //var sorted = RimBuzzer_Settings.costumColorMinutes
+        //    .Select((x, i) => (Value: x, OriginalIndex: i))
+        //    .OrderBy(x => x.Value)
+        //    .ToList();
+
+        //int originalIndexOfTheSmallestItem = sorted[0].OriginalIndex;
+
+        //List<int> B = sorted.Select(x => x.Value).ToList();
+        //List<int> idx = sorted.Select(x => x.OriginalIndex).ToList();
+
+
+
+
+
 
         public Alert_SessionPlayTimeTracker()
         {
@@ -27,11 +55,11 @@ namespace Dolphus.RimBuzzer.MatchTimer
 
         public override string GetLabel()
         {
-            if (RimBuzzerMain.TimerShouldAppearMinimalist)
+            if (RimBuzzer_Settings.timerAppearMinimalist)
             {
-                return RimBuzzerMain.UnPausedTimeTracker.ToString();
+                return RimBuzzer.UnPausedTimeTracker.ToString();
             }
-            return "SPT T+ " + RimBuzzerMain.UnPausedTimeTracker.ToString();
+            return "UPT T+ " + RimBuzzer.UnPausedTimeTracker.ToString();
         }
 
         public override TaggedString GetExplanation()
@@ -41,14 +69,14 @@ namespace Dolphus.RimBuzzer.MatchTimer
 
         public override AlertReport GetReport()
         {
-            return RimBuzzerMain.TimerIsDisplayedAsAlert;
+            return RimBuzzer_Settings.timerDisplayLocation.Equals(TimerDisplayLocationEnum.NOTIFICATION);
         }
 
         protected override Color BGColor
         {
             get
             {
-                if (RimBuzzerMain.TimerAlertShouldUseColorGradient)
+                if (RimBuzzer_Settings.customColors.Count > 0)
                 {
                     return GradientColor;
                 }
@@ -76,47 +104,21 @@ namespace Dolphus.RimBuzzer.MatchTimer
         {
             get
             {
-                TimeSpan elapsedTime = RimBuzzerMain.UnPausedTimeTracker.ElapsedTime;
-                float progression = Mathf.Clamp((float)(elapsedTime.TotalMilliseconds / maxTimeForGradient.TotalMilliseconds), 0, 1);
-                float localProgression;
-                // Different progression results in different gradience
-                if (progression < 0.4f)
-                {
-                    // Red -> Yellow
-                    // defaultPriority = AlertPriority.Medium;
-                    localProgression = progression / 0.4f;
-                    return new Color(175 / 256f * localProgression, 175 / 256f, 0);
-                }
-                else if (progression < 0.7f)
-                {
-                    // Yellow -> Red
-                    // defaultPriority = AlertPriority.High;
-                    localProgression = (progression - 0.4f) / 0.3f;
-                    return new Color(175 / 256f, 175 / 256f * (1 - localProgression), 0);
-                }
-                else
-                {
-                    // Red -> Purple
-                    // New version: Red -> Black
-                    // defaultPriority = AlertPriority.Critical;
-                    localProgression = (progression - 0.7f) / 0.3f;
-                    return new Color((175 / 256f) * (1 - localProgression), 0, 0);
-                    // return new Color((175 - (175 - 120) * localProgression) / 256f, 0, 120 / 256f * localProgression);
-                }
-                /*
-                progression *= Mathf.PI / 2;
-                // return new Color(125 / 256f, 0, 125 / 256f);
-                return new Color(125 / 256f * Mathf.Sin(progression), 150 / 256f * Mathf.Cos(progression), 125 / 256f * Mathf.Sin(progression));
-                */
+                TimeSpan elapsedTime = RimBuzzer.UnPausedTimeTracker.ElapsedTime;
+                int[] colorMinutesArr = RimBuzzer_Settings.costumColorMinutes.ToArray(); // I already checked that it is longer than 0 in BGColor.
+                if (colorMinutesArr.Where(x => x <= elapsedTime.Minutes).Count() == 0)
+                    return Color.clear;
+                int colorMinutes = colorMinutesArr.Where(x => x <= elapsedTime.Minutes).Max(); // It doesn't have to be super optimized. These arrays are tiny.
+                int colorIdx = Array.IndexOf(colorMinutesArr, colorMinutes);
+                return RimBuzzer_Settings.customColors[colorIdx] * (RimBuzzer_Settings.costumColorPulse[colorIdx] ? Pulse : 1);
             }
         }
 
-        private Color PulserColor
+        private float Pulse
         {
             get
             {
-                float num = Pulser.PulseBrightness(PulseFreq, Pulser.PulseBrightness(PulseFreq, PulseAmpCritical));
-                return new Color(num, num, num);
+                return Pulser.PulseBrightness(PulseFreq, Pulser.PulseBrightness(PulseFreq, PulseAmpCritical));
             }
         }
     }

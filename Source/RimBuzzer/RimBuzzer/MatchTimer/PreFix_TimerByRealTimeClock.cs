@@ -28,13 +28,13 @@ namespace Dolphus.RimBuzzer.MatchTimer
             string result = ClockReadoutStringBuilder.GenerateTimeStringNow(); // Choses the formatting of the real time clock.
                                                                                // The user might want these options, so I will just include it. This mod and Session Play Time Tracker
                                                                                // are incompatible in this regard, since they overwrite the same method. 
-            if (RimBuzzerMain.TimerIsDisplayedAtClock)
-            {
-                if (!RimBuzzerMain.TimerShouldAppearMinimalist) { result += string.Format(" (UPT {0})", RimBuzzerMain.UnPausedTimeTracker.ToString());}
+            if (RimBuzzer_Settings.timerDisplayLocation.Equals(TimerDisplayLocationEnum.REALTIMECLOCK))
+            { // What the actual fuck? Why does that comment not work? Okay never every have two enums of the same same. Fuck me. 
+                if (!RimBuzzer_Settings.timerAppearMinimalist) { result += string.Format(" (UPT {0})", RimBuzzer.UnPausedTimeTracker.ToString());}
 
-                else { result += string.Format(" ({0})", RimBuzzerMain.UnPausedTimeTracker.ToString()); }
+                else { result += string.Format(" ({0})", RimBuzzer.UnPausedTimeTracker.ToString()); }
             }
-            // Log.Error("Result is: " + result);
+            
             return result;
         }
     }

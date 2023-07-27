@@ -23,7 +23,8 @@ namespace Dolphus.RimBuzzer.MatchTimer
             if (Current.Game == null)
             {
                 // not in the play map (eg, in the main menu); irrelevant!
-                RimBuzzerMain.IdempotentResetTimer(); // I can't find a method that kicks off when you exit to main menu. Ask about this. 
+                // RimBuzzer.IdempotentResetTimer(); // I can't find a method that kicks off when you exit to main menu. Ask about this. 
+                // Currently this happens every tick which is pretty dumb.
                 return;
             }
             if (Find.TickManager.Paused) // (Find.TickManager points to Current.Game.tickManager)
@@ -45,7 +46,7 @@ namespace Dolphus.RimBuzzer.MatchTimer
                 ignoreNext = false;
                 return;
             }
-            RimBuzzerMain.AccumulateTime(RealTime.realDeltaTime);
+            RimBuzzer.AccumulateTime(RealTime.realDeltaTime);
         }
     }
 }

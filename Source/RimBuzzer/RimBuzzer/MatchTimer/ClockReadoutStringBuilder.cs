@@ -9,21 +9,21 @@ namespace Dolphus.RimBuzzer.MatchTimer
     {
         public static string GenerateTimeStringNow()
         {
-            ClockReadoutFormatEnum3 formatEnum = RimBuzzerMain.SettingHandle_ClockDisplayFormat;
+            ClockReadoutFormatEnum formatEnum = RimBuzzer_Settings.ClockReadoutFormat;
             string format;
 
             switch (formatEnum)
             {
-                case ClockReadoutFormatEnum3.SIMPLE_24HR:
+                case ClockReadoutFormatEnum.SIMPLE_24HR:
                     format = "HH:mm";
                     break;
-                case ClockReadoutFormatEnum3.SIMPLE_12HR:
+                case ClockReadoutFormatEnum.SIMPLE_12HR:
                     format = "hh:mm tt";
                     break;
-                case ClockReadoutFormatEnum3.FULL_24HR:
+                case ClockReadoutFormatEnum.FULL_24HR:
                     format = "HH:mm:ss";
                     break;
-                case ClockReadoutFormatEnum3.FULL_12HR:
+                case ClockReadoutFormatEnum.FULL_12HR:
                     format = "hh:mm:ss tt";
                     break;
                 default:
