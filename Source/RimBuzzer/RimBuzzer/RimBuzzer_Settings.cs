@@ -208,8 +208,8 @@ namespace Dolphus.RimBuzzer
 
                 var listRect = list.GetRect(inRect.height - list.CurHeight - 24 - 12 - padding);
                 var innerWidth = listRect.width - (colors.Count > 5 ? 16 : 0); // Make space for the scrollbar when there are a lot of colors.
-                var innerHeight = colors.Count == 0 ? 100 : colors.Count * ((24 + 6) + (24 + 6)) + 24; // This was the culprit. Discovering that this was causing widgets to veer off the the right took long.
-                                                                                                       // 24 for the first button, 24 + 6 for color + space and 24 + 6 for int + space.
+                var innerHeight = colors.Count == 0 ? 150 : colors.Count * ((24 + 6) + (24 + 6)) + 24; // This was the culprit. Discovering that this was causing widgets to veer off the the right took long.
+                                                    //130 is the limit here                            // 24 for the first button, 24 + 6 for color + space and 24 + 6 for int + space.
                 var innerRect = new Rect(0f, 0f, innerWidth, innerHeight);
                 Widgets.BeginScrollView(listRect, ref scrollPosition, innerRect, true);
                 var innerList = new Listing_Standard();
@@ -226,6 +226,9 @@ namespace Dolphus.RimBuzzer
                     colorFlash.Add(newColorFlash);
                     int newColorMinutes = countdownMinutes;
                     colorMinutes.Add(newColorMinutes);
+                    Log.Message("colors.Count(): " + colors.Count().ToString());
+                    Log.Message("colorFlash.Count(): " + colorFlash.Count().ToString());
+                    Log.Message("colorMinutes.Count(): " + colorMinutes.Count().ToString());
                 }
 
                 for (var i = 0; i < colors.Count; i++) // Will only run if colors.Count >= 1, so there are colors.  
@@ -274,9 +277,12 @@ namespace Dolphus.RimBuzzer
                 }
                 if (colors.Count == 0)
                 {
+                    Log.Message("colorMinutes.Count() == 0 : " + colorMinutes.Count().ToString());
                     innerList.Gap();
                     Text.Font = GameFont.Tiny;
+                    GUI.color = Color.gray;
                     _ = innerList.Label("AddingCustomColors".Translate());
+                    GUI.color = Color.white;
                 }
 
                 innerList.End();

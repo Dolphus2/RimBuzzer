@@ -73,6 +73,7 @@
     <Compile Include="MatchTimer\Alert_MatchTimer.cs" />
     <Compile Include="MatchTimer\ClockReadoutStringBuilder.cs" />
     <Compile Include="MatchTimer\PostFix_RealTime_Update.cs" />
+    <Compile Include="MatchTimer\PostFix_UnloadedGame.cs" />
     <Compile Include="MatchTimer\PreFix_TimerByRealTimeClock.cs" />
     <Compile Include="MatchTimer\RimWorldCDT.cs" />
     <Compile Include="MatchTimer\RimWorldUPTT.cs" />

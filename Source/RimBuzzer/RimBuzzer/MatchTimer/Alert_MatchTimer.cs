@@ -12,41 +12,11 @@ namespace Dolphus.RimBuzzer.MatchTimer
     public class Alert_SessionPlayTimeTracker : Alert // Adds the match timer as permanent alert instead of adding a seperate widget.
     {
         /// <summary>
-        /// Defines the time interval that the time-based color gradient is scaled on. Currently set to 5 hours.
+        /// Defines the frequency and amplitude of the color pulsing for alert colors set to pulse in the mod options menu.
         /// </summary>
-
         private const float PulseFreq = 0.5f;
         private const float PulseAmpCritical = 0.6f;
         private TaggedString explanation = new TaggedString("UPTT_TrackerAlert_tooltip".Translate());
-
-        // private List<int> sortedColorMinutes = Tools.argsort(costumColorMinutes, ref )
-
-
-        //public List<int> colorIdx = RimBuzzer_Settings.costumColorMinutes
-        //    .Select((x, i) => (Value: x, OriginalIndex: i))
-        //    .OrderBy(x => x.Value)
-        //    .ToList();
-
-        //public static List<Color> customColors = new List<Color>();
-        //public static List<Material> customColorMaterials = new List<Material>();
-        //public static List<bool> costumColorFlash = new List<bool>();
-        //public static List<int> costumColorMinutes = new List<int>();
-
-
-        //var sorted = RimBuzzer_Settings.costumColorMinutes
-        //    .Select((x, i) => (Value: x, OriginalIndex: i))
-        //    .OrderBy(x => x.Value)
-        //    .ToList();
-
-        //int originalIndexOfTheSmallestItem = sorted[0].OriginalIndex;
-
-        //List<int> B = sorted.Select(x => x.Value).ToList();
-        //List<int> idx = sorted.Select(x => x.OriginalIndex).ToList();
-
-
-
-
-
 
         public Alert_SessionPlayTimeTracker()
         {
@@ -59,7 +29,7 @@ namespace Dolphus.RimBuzzer.MatchTimer
             {
                 return RimBuzzer.UnPausedTimeTracker.ToString();
             }
-            return "UPT T+ " + RimBuzzer.UnPausedTimeTracker.ToString();
+            return "UPT T " + RimBuzzer.UnPausedTimeTracker.ToString();
         }
 
         public override TaggedString GetExplanation()
@@ -84,19 +54,6 @@ namespace Dolphus.RimBuzzer.MatchTimer
                 {
                     return Color.clear;
                 }
-                //int elapsedTicks = PlayTimeTrackerMain.TimeKeeperObjectInstance.TotalTime;
-                //float progression = ((float)elapsedTicks) / maxTimeForGradience;
-                // return GradientColor;
-                /*
-                if (progression >= 0.7f)
-                {
-                    return PulserColor * GradientColor;
-                }
-                else
-                {
-                    return GradientColor;
-                }
-                */
             }
         }
 

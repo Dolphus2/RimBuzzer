@@ -33,7 +33,7 @@
   <BuzzerLastsSecondsExplained>Wether or not to include a buzzer button in the time controls panel. When clicking the button, the game pauses and plays a global X second long sound buzzer before unpausing. Useful for signalling the start of RimWorld PVP matches.\n\nNote: When playing RimWorld through Zethrith's Multiplayer, only the host can trigger this button.</BuzzerLastsSecondsExplained>
   <CustomColors>UPTT Alert Gradient Colors</CustomColors>
 	<AddColor>Add Gradient Color</AddColor>
-	<AddingCustomColors>Color gradients for when the UPTT is displayed as an alert. The colors will overlay the UPTT alert after X minutes and flash periodically if the option is selected.</AddingCustomColors>
+	<AddingCustomColors>Color gradients for when the UPTT is displayed as an alert. The colors will overlay the UPTT alert after X minutes and pulse periodically if the option is selected.\n\nNote: The alert will not appear until the game has run for about 20 seconds on normal speed.</AddingCustomColors>
 
   <ColorGradientMinutesTitle>Pulse  |  Overlay after X minutes</ColorGradientMinutesTitle>
 

@@ -57,7 +57,7 @@ namespace Dolphus.RimBuzzer
                 if (upttObject == null)
                 {
                     upttObject = new RimWorldUPTT();
-                    Log.Error("Beginning timer through get");
+                    Log.Message("Beginning timer through get");
                 }
                 return upttObject;
             }
@@ -74,12 +74,12 @@ namespace Dolphus.RimBuzzer
             UnPausedTimeTracker = new RimWorldUPTT();
         }
 
-        public static void IdempotentBeginTimer()
+        public static void IdempotentBeginTimer() // has been folded into the UnPausedTimeTracker getter.
         {
             // the main idea is to avoid resetting it when it is already counting, eg when in multiplayer and a new player joins.
             Log.Error("Idempotent begin timer");
-            if (UnPausedTimeTracker == null) // Haha, this comparison actually creates the timer because it is fires the getter.
-            {
+            if (UnPausedTimeTracker == null) // Haha, this comparison actually creates the timer if it doesn't exist because it is fires the getter. 
+            {                                // So the part inside the if statement will never fire. There mey exist a timer already though.
                 Log.Error("Idempotent begin timer: inner logic");
                 UnPausedTimeTracker = new RimWorldUPTT();
             }
@@ -90,14 +90,6 @@ namespace Dolphus.RimBuzzer
             Log.Error("Idempotent reset timer");
             UnPausedTimeTracker = null;
         }
-
-        ///// <summary> // I have to get around this somehow. I need to find a good hook that does the same thing. 
-        ///// Initializes the timer upon entering the game. I might have to change this when I figure out how to multiplayer patch.
-        ///// </summary>
-        //public override void WorldLoaded()
-        //{
-        //    IdempotentBeginTimer();
-        //}
 
         /// <summary>
         /// Warning: DO NOT CALL THIS IF NOT IN PLAY MAP!!!
@@ -115,21 +107,28 @@ namespace Dolphus.RimBuzzer
 
             static RimBuzzer_PostInit()
             {
+                Log.Message("Hello World!");
                 // IdempotentBeginTimer();
+                Log.Message("colors.Count(): " + RimBuzzer_Settings.customColors.Count().ToString());
+                Log.Message("colorFlash.Count(): " + RimBuzzer_Settings.costumColorPulse.Count().ToString());
+                Log.Message("colorMinutes.Count(): " + RimBuzzer_Settings.costumColorMinutes.Count().ToString());
             }
         }
 
-        [HarmonyPatch(typeof(Game))]
-        [HarmonyPatch(nameof(Game.FinalizeInit))]
-        // [HarmonyPatch("Update", MethodType.Normal)]
-        static class Game_FinalizeInit_Patch
-        {
-            [HarmonyPostfix]
-            public static void Postfix()
-            {
-                RimBuzzer.IdempotentBeginTimer();
-            }
-        }
+        /// <summary>
+        /// Initializes the timer upon entering the game only if. I might have to change this when I figure out how to multiplayer patch.
+        /// </summary>
+        //[HarmonyPatch(typeof(Game))]
+        //[HarmonyPatch(nameof(Game.FinalizeInit))]
+        //// [HarmonyPatch("Update", MethodType.Normal)]
+        //static class Game_FinalizeInit_Patch
+        //{
+        //    [HarmonyPostfix]
+        //    public static void Postfix()
+        //    {
+        //        RimBuzzer.IdempotentBeginTimer();
+        //    }
+        //}
 
 
 
