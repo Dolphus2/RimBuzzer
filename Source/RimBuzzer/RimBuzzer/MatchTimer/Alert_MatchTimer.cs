@@ -14,6 +14,7 @@ namespace Dolphus.RimBuzzer.MatchTimer
         /// <summary>
         /// Defines the frequency and amplitude of the color pulsing for alert colors set to pulse in the mod options menu.
         /// </summary>
+        private int lastActiveFrame = -1; // Don't know what this does.
         private const float PulseFreq = 0.5f;
         private const float PulseAmpCritical = 0.6f;
         private TaggedString explanation = new TaggedString("UPTT_TrackerAlert_tooltip".Translate());
@@ -77,6 +78,18 @@ namespace Dolphus.RimBuzzer.MatchTimer
             {
                 return Pulser.PulseBrightness(PulseFreq, Pulser.PulseBrightness(PulseFreq, PulseAmpCritical));
             }
+        }
+
+
+        // I doubt I will need this. 
+        public override void AlertActiveUpdate()
+        {
+            if (lastActiveFrame < Time.frameCount - 1)
+            {
+                // Messages.Message("MessageCriticalAlert".Translate(base.Label.CapitalizeFirst()), new LookTargets(GetReport().AllCulprits), MessageTypeDefOf.ThreatBig);
+                // Messages are placed in the top left.
+            }
+            lastActiveFrame = Time.frameCount;
         }
     }
 }

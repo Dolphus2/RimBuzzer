@@ -22,17 +22,10 @@ namespace Dolphus.RimBuzzer
         public static bool BetterMessagePlacement = true;
 
         public static bool UPTT_enabled = true; // static is good here because there is only one instance of this class. It can therefore be treated as static. The field here
-        public static bool UPTTEnabled // The property used to access the field.
+        public static bool UPTTEnabled // The property used to access the field. Learning getters and setters.
         {
             get { return UPTT_enabled; }
-            set
-            {
-                if (value) // Something I want to do if the mod is set to enabled. Probably show the timer. 
-                    ;
-                else // Or do if it is set to disabled.
-                    ;
-                UPTT_enabled = value;
-            }
+            set { UPTT_enabled = value;}
         }
         public static TimerDisplayLocationEnum timerDisplayLocation = TimerDisplayLocationEnum.REALTIMECLOCK; 
         public static bool timerUseHours = false;

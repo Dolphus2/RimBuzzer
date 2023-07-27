@@ -1,9 +1,12 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 using Verse;
+using Verse.Sound;
+using Verse.Steam;
 
 namespace Dolphus.RimBuzzer.MatchTimer
 {
@@ -82,6 +85,17 @@ namespace Dolphus.RimBuzzer.MatchTimer
         public void AccumulateTime(float amount)
         {
             accumulation += amount;
+        }
+
+
+
+        // I just need to figure out the right place to put this.
+        private static void PlaySoundOf()
+        {
+            // SoundDef soundDef = SoundDefOf.Clock_Stop;
+            SoundDef soundDef = SoundDefOf.Thunder_OnMap;
+            soundDef?.PlayOneShotOnCamera();
+            SteamDeck.Vibrate(); // Hehe
         }
     }
 }
