@@ -43,14 +43,13 @@ namespace Dolphus.RimBuzzer
         private static RimWorldUPTT upttObject;
 
         /// <summary>
-        /// The unpaused time tracker.
+        /// The UnPaused Time Tracker (UPTT).
         /// 
         /// It is possible to use this idempotently in eg Zetrith's Multiplayer:
         /// - This property will auto-create a static tracker if prior instances do not exist
         /// - You call the idempotent-reset function to reset the timer when the game quits to main menu (the other exit path "Quit to OS" is obviously irrelevant)
         /// - You do not call AccumulateTime when the game is not in active state.
         /// </summary>
-
         public static RimWorldUPTT UnPausedTimeTracker
         {
             get
@@ -79,7 +78,7 @@ namespace Dolphus.RimBuzzer
         {
             // the main idea is to avoid resetting it when it is already counting, eg when in multiplayer and a new player joins.
             Log.Error("Idempotent begin timer");
-            if (UnPausedTimeTracker == null) // FUUUUUU. This is supposed to be ==. Check it out later. Haha, this comparison actually creates the timer because it is fires the getter.
+            if (UnPausedTimeTracker == null) // Haha, this comparison actually creates the timer because it is fires the getter.
             {
                 Log.Error("Idempotent begin timer: inner logic");
                 UnPausedTimeTracker = new RimWorldUPTT();
