@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <settings_enumClockDisplayFormat_ButtonLabel.SIMPLE_24HR>Simple 24-Hr (Vanilla) (HH:MM)</settings_enumClockDisplayFormat_ButtonLabel.SIMPLE_24HR>
+  <settings_enumClockDisplayFormat_ButtonLabel.SIMPLE_12HR>Simple 12-Hr (HH:MM)</settings_enumClockDisplayFormat_ButtonLabel.SIMPLE_12HR>
+  <settings_enumClockDisplayFormat_ButtonLabel.FULL_24HR>Full 24-Hr (HH:MM:SS)</settings_enumClockDisplayFormat_ButtonLabel.FULL_24HR>
+  <settings_enumClockDisplayFormat_ButtonLabel.FULL_12HR>Full 12-Hr (HH:MM:SS)</settings_enumClockDisplayFormat_ButtonLabel.FULL_12HR>
+
+  <settings_enumTimerDisplayLocation_ButtonLabel.HIDDEN>Hidden (Vanilla)</settings_enumTimerDisplayLocation_ButtonLabel.HIDDEN>
+  <settings_enumTimerDisplayLocation_ButtonLabel.NOTIFICATION>Notification area</settings_enumTimerDisplayLocation_ButtonLabel.NOTIFICATION>
+  <settings_enumTimerDisplayLocation_ButtonLabel.REALTIMECLOCK>Real time clock</settings_enumTimerDisplayLocation_ButtonLabel.REALTIMECLOCK>
+
+  <settings_enumTimerFormat_ButtonLabel.STOPWATCH>Stopwatch</settings_enumTimerFormat_ButtonLabel.STOPWATCH>
+  <settings_enumTimerFormat_ButtonLabel.COUNTDOWN>Countdown</settings_enumTimerFormat_ButtonLabel.COUNTDOWN>
+</LanguageData>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <RimBuzzer_ModTitle>RimBuzzer</RimBuzzer_ModTitle>
+
+  <settings_enumClockDisplayFormat>Real-time clock display format</settings_enumClockDisplayFormat>
+  <settings_enumClockDisplayFormat_tooltip>Choose how the real-time clock in the UI should be displayed. Settings are effective immediately.</settings_enumClockDisplayFormat_tooltip>
+
+  <settings_BetterMessagePlacement>Enable better message placement</settings_BetterMessagePlacement>
+  <settings_BetterMessagePlacement_tooltip>Dynamically adjusts the location messages are written at to avoid blocking the colonist bar. Identical to enabling the mod "Better Message Placement". Credit to Dyrewulfe for making the mod and to Mlie for updating it to 1.4.</settings_BetterMessagePlacement_tooltip>
+  <settings_UPTTIsEnabled>Enable UnPaused Time Tracker (UPTT)</settings_UPTTIsEnabled>
+  <settings_UPTTIsEnabled_tooltip>A time tracker that measures how long the game has been unpaused in real time. \n\nNote: The timer will count time tabbed out if the game is set to not run in the backround.</settings_UPTTIsEnabled_tooltip>
+
+  <settings_enumTimerDisplayLocation>UPTT display location</settings_enumTimerDisplayLocation>
+  <settings_enumTimerDisplayLocation_tooltip>Choose where the UnPaused Time Tracker should appear in. Settings are effective immediately.\n\nNote: The alert will not appear until the game has run for about 20 seconds on normal speed.</settings_enumTimerDisplayLocation_tooltip>
+  <settings_TimerUseHours>UPTT displays hours part</settings_TimerUseHours>
+  <settings_TimerUseHours_tooltip>Whether or not the UnPaused Time Tracker display should show hours. Settings are effective immediately.</settings_TimerUseHours_tooltip>
+  <settings_TimerUseMiliseconds>UPTT displays milliseconds part</settings_TimerUseMiliseconds>
+  <settings_TimerUseMiliseconds_tooltip>Whether or not the UnPaused Time Tracker display should show milliseconds. Settings are effective immediately.\n\nNote: The policy is to display milliseconds with 2 digit precision (technically centiseconds).</settings_TimerUseMiliseconds_tooltip>
+  <settings_TimerAppearMinimalist>UPTT appears minimalst</settings_TimerAppearMinimalist>
+  <settings_TimerAppearMinimalist_tooltip>Just the time. No letters. No funny business. Maybe parentheses but no more.</settings_TimerAppearMinimalist_tooltip>
+
+  <settings_enumTimerFormat>UPTT display format</settings_enumTimerFormat>
+  <settings_enumTimerFormat_tooltip>Whether to display the UnPaused Time Tracker as a stopwatch or a countdown from some starting time.</settings_enumTimerFormat_tooltip>
+  
+  <CountdownMinutesTitle>Count down from X minutes</CountdownMinutesTitle>
+  <CountdownMinutesExplained>How many minutes the count down should last. Once the count down ends, the timer ticks over into negative time.</CountdownMinutesExplained>
+  <PauseAfterMinutesTitle>Pause after X minutes</PauseAfterMinutesTitle>
+  <PauseAfterMinutesExplained>Whether or not the game should pause after X minutes.\nThese options are entirely modular.</PauseAfterMinutesExplained>
+  <PlaySoundAfterMinutesTitle>Play sound after X minutes</PlaySoundAfterMinutesTitle>
+  <PlaySoundAfterMinutesExplained>Whether or not the game should play a global sound after X minutes.\nThese options are entirely modular.</PlaySoundAfterMinutesExplained>
+
+  <BuzzerLastsSecondsTitle>Buzzer lasts X seconds</BuzzerLastsSecondsTitle>
+  <BuzzerLastsSecondsExplained>Wether or not to include a buzzer button in the time controls panel. When clicking the button, the game pauses and plays a global X second long sound buzzer before unpausing. Useful for signalling the start of RimWorld PVP matches.\n\nNote: When playing RimWorld through Zethrith's Multiplayer, only the host can trigger this button.</BuzzerLastsSecondsExplained>
+  <CustomColors>UPTT Alert Gradient Colors</CustomColors>
+	<AddColor>Add Gradient Color</AddColor>
+	<AddingCustomColors>Color gradients for when the UPTT is displayed as an alert. The colors will overlay the UPTT alert after X minutes and flash periodically if the option is selected.</AddingCustomColors>
+
+  <ColorGradientMinutesTitle>Pulse  |  Overlay after X minutes</ColorGradientMinutesTitle>
+
+  <UPTT_TrackerAlert_tooltip></UPTT_TrackerAlert_tooltip>
+</LanguageData>
