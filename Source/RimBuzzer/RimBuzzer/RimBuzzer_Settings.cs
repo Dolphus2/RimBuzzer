@@ -168,7 +168,7 @@ namespace Dolphus.RimBuzzer
                 list.Gap(standardGap);
                 list.IntegerPlusMinusCheckbox("PauseAfterMinutes", ref pauseAfterMinutes, ref pauseAfter, valMin: 1, valMax: 60);
                 list.Gap(standardGap);
-                list.IntegerPlusMinusCheckbox("PlaySoundAfterMinutes", ref playSoundAfterMinutes, ref playSoundAfter, valMin: 1, valMax: 60);
+                list.IntegerPlusMinusCheckbox("PlaySoundAfterMinutes", ref playSoundAfterMinutes, ref playSoundAfter, valMin: 0, valMax: 60); // Change to default 1
 
                 GenUI.ResetLabelAlign();
 

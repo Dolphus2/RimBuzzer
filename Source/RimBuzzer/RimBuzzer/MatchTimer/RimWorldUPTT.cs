@@ -45,21 +45,31 @@ namespace Dolphus.RimBuzzer.MatchTimer
             // Hours: displayed in full.
             // Supposedly matches don't go on for more than 24 hours.
             TimeSpan displayTime;
-            if (RimBuzzer_Settings.timerFormat.Equals(TimerFormatEnum.STOPWATCH))
+            switch (RimBuzzer_Settings.timerFormat)
             {
-                displayTime = ElapsedTime;
-                if (!RimBuzzer_Settings.timerAppearMinimalist) builder.AppendFormat("+ ");
+                case TimerFormatEnum.STOPWATCH:
+                    displayTime = ElapsedTime;
+                    if (!RimBuzzer_Settings.timerAppearMinimalist) builder.AppendFormat("+ ");
+                    break;
+
+                case TimerFormatEnum.COUNTDOWN:
+                    displayTime = TimeSpan.FromMinutes(RimBuzzer_Settings.countdownMinutes) - ElapsedTime;
+                    if (displayTime < TimeSpan.Zero)
+                    {
+                        displayTime = -displayTime;
+                        builder.AppendFormat("- ");
+                    }
+                    else if (!RimBuzzer_Settings.timerAppearMinimalist) builder.AppendFormat("+ ");
+                    break;
+
+                default:
+                    Log.Error(String.Format("Illegal TimerFormatEnum value {0}", RimBuzzer_Settings.timerFormat));
+                    // Evil value, fail quickly 
+                    displayTime = ElapsedTime;
+                    break;
             }
-            else // if (RimBuzzer_Settings.timerFormat.Equals(TimerFormatEnum.COUNTDOWN))
-            {   
-                displayTime = TimeSpan.FromMinutes(RimBuzzer_Settings.countdownMinutes) - ElapsedTime;
-                if (displayTime < TimeSpan.Zero)
-                {
-                    displayTime = -displayTime;
-                    builder.AppendFormat("- ");
-                }
-                else if (!RimBuzzer_Settings.timerAppearMinimalist) builder.AppendFormat("+ ");
-            }
+
+
 
             if (RimBuzzer_Settings.timerUseHours)
             {

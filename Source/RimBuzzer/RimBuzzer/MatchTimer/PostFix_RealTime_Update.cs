@@ -46,7 +46,16 @@ namespace Dolphus.RimBuzzer.MatchTimer
                 ignoreNext = false;
                 return;
             }
-            RimBuzzer.AccumulateTime(RealTime.realDeltaTime);
+            RimBuzzer.AccumulateTime(RealTime.realDeltaTime); // Could also save the initial time and write the difference at each step instead. No. This is more robust with respect to stopping the timer.
+
+            if (RimBuzzer_Settings.pauseAfter)
+            {
+                UPTTAuxiliaryMethods.PauseGame();
+            }
+            if (RimBuzzer_Settings.playSoundAfter)
+            {
+                UPTTAuxiliaryMethods.PlaySound();
+            }
         }
     }
 }

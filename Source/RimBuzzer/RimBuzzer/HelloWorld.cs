@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using RimWorld;
 using Verse;
-using HugsLib;
-using HugsLib.Settings;
 
 namespace Dolphus.RimBuzzer
 {
