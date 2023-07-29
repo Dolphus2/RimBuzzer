@@ -96,16 +96,5 @@ namespace Dolphus.RimBuzzer.MatchTimer
         {
             accumulation += amount;
         }
-
-
-
-        // I just need to figure out the right place to put this.
-        private static void PlaySoundOf()
-        {
-            // SoundDef soundDef = SoundDefOf.Clock_Stop;
-            SoundDef soundDef = SoundDefOf.Thunder_OnMap;
-            soundDef?.PlayOneShotOnCamera();
-            SteamDeck.Vibrate(); // Hehe
-        }
     }
 }

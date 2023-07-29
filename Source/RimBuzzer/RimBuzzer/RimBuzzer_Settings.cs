@@ -178,7 +178,7 @@ namespace Dolphus.RimBuzzer
 
             list.NewColumn();
             list.Gap();
-            list.IntegerPlusMinusCheckbox("BuzzerLastsSeconds", ref buzzerLastsSeconds, ref buzzerEnabled, valMin: 1, valMax: 10);
+            list.IntegerPlusMinusCheckbox("BuzzerLastsSeconds", ref buzzerLastsSeconds, ref buzzerEnabled, valMin: 0, valMax: 10);
             if (UPTTEnabled)
             {
                 list.GapLine(standardGap);

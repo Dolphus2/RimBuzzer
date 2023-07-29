@@ -11,7 +11,7 @@
   <settings_UPTTIsEnabled_tooltip>A time tracker that measures how long the game has been unpaused in real time. \n\nNote: The timer will count time tabbed out if the game is set to not run in the backround.</settings_UPTTIsEnabled_tooltip>
 
   <settings_enumTimerDisplayLocation>UPTT display location</settings_enumTimerDisplayLocation>
-  <settings_enumTimerDisplayLocation_tooltip>Choose where the UnPaused Time Tracker should appear in. Settings are effective immediately.\n\nNote: The tracker will not appear if you choose "Real time clock" but did not activate "Show real time clock" in the settings.\nRimworld suppresses alerts until the game has run for about 20 seconds on normal speed.</settings_enumTimerDisplayLocation_tooltip>
+  <settings_enumTimerDisplayLocation_tooltip>Choose where the UnPaused Time Tracker should appear in. Settings are effective immediately.\n\nNote: The tracker will not appear if you choose "Real time clock" but did not activate "Show real time clock" in the settings.\nRimworld suppresses alerts until the game has run for about 10 seconds on normal speed.</settings_enumTimerDisplayLocation_tooltip>
   <settings_TimerUseHours>UPTT displays hours part</settings_TimerUseHours>
   <settings_TimerUseHours_tooltip>Whether or not the UnPaused Time Tracker display should show hours. Settings are effective immediately.</settings_TimerUseHours_tooltip>
   <settings_TimerUseMiliseconds>UPTT displays milliseconds part</settings_TimerUseMiliseconds>
@@ -30,11 +30,12 @@
   <PlaySoundAfterMinutesExplained>Whether or not the game should play a global sound after X minutes.\nThese options are entirely modular.</PlaySoundAfterMinutesExplained>
 
   <BuzzerLastsSecondsTitle>Buzzer lasts X seconds</BuzzerLastsSecondsTitle>
-  <BuzzerLastsSecondsExplained>Wether or not to include a buzzer button in the time controls panel. When clicking the button, the game pauses and plays a global X second long sound buzzer before unpausing. Useful for signalling the start of RimWorld PVP matches.\n\nNote: When playing RimWorld through Zethrith's Multiplayer, only the host can trigger this button.</BuzzerLastsSecondsExplained>
+  <BuzzerLastsSecondsExplained>Wether or not to include a buzzer button in the time controls panel. When clicking the button, the game pauses and plays a global X second long sound buzzer before unpausing. Useful for signalling the start of RimWorld PVP matches.
+    \nNote: When set to 0 seconds, clicking the button just plays the "buzzer end" sound.\nWhen playing RimWorld through Zethrith's Multiplayer, only the host can trigger this button.</BuzzerLastsSecondsExplained>
   <CustomColors>UPTT Alert Gradient Colors</CustomColors>
 	<AddColor>Add Gradient Color</AddColor>
 	<AddingCustomColors>Color gradients for when the UPTT is displayed as an alert. The colors will overlay the UPTT alert after X minutes and pulse periodically if the option is selected.
-    \n\nNote: Rimworld suppresses alerts until the game has run for about 20 seconds on normal speed.</AddingCustomColors>
+    \nNote: Rimworld suppresses alerts until the game has run for about 10 seconds on normal speed.</AddingCustomColors>
 
   <ColorGradientMinutesTitle>Pulse  |  Overlay after X minutes</ColorGradientMinutesTitle>
 </LanguageData>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
     <SoundDef>
-        <defName>Dolphus_Rimbuzzer_BuzzerEnd</defName>
+        <defName>Dolphus_Rimbuzzer_TimerEnd</defName>
         <maxSimultaneous>1</maxSimultaneous>
         <subSounds>
         <li>
@@ -17,7 +17,23 @@
     </SoundDef>
 
     <SoundDef>
-        <defName>Dolphus_Rimbuzzer_BuzzerStart</defName>
+        <defName>Dolphus_Rimbuzzer_Buzzer</defName>
+        <maxSimultaneous>1</maxSimultaneous>
+        <subSounds>
+        <li>
+            <onCamera>True</onCamera>
+            <grains>
+            <li Class="AudioGrain_Clip">
+                <clipPath>UI/LetterArriveBadUrgentBig</clipPath>
+            </li>
+            </grains>
+            <volumeRange>70~70</volumeRange>
+        </li>
+        </subSounds>
+    </SoundDef>
+
+    <SoundDef>
+        <defName>Dolphus_Rimbuzzer_BuzzerEnd</defName>
         <maxSimultaneous>1</maxSimultaneous>
         <subSounds>
         <li>

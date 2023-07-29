@@ -43,7 +43,7 @@ namespace Dolphus.RimBuzzer.MatchTimer
                 soundDef = DefDatabase<SoundDef>.AllDefs.FirstOrDefault(sound => sound.defName == "LetterArrive_BadUrgentBig");
                 soundDef = DefDatabase<SoundDef>.AllDefs.FirstOrDefault(sound => sound.defName == "Dolphus_Rimbuzzer_BuzzerEnd");
                 soundDef = DefDatabase<SoundDef>.GetNamed("Dolphus_Rimbuzzer_BuzzerEnd");
-                soundDef = RimBuzzer_SoundDefOf.Dolphus_Rimbuzzer_BuzzerEnd;
+                soundDef = RimBuzzer_SoundDefOf.Dolphus_Rimbuzzer_TimerEnd;
 
                 //SoundDef soundDef = DefDatabase<SoundDef>.AllDefs
                 //.Where(x => x.HasModExtension<SoundDefExtension>())

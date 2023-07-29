@@ -11,8 +11,9 @@ namespace Dolphus.RimBuzzer.Sounds
     [DefOf]
     public static class RimBuzzer_SoundDefOf
     {
+        public static SoundDef Dolphus_Rimbuzzer_TimerEnd;
+        public static SoundDef Dolphus_Rimbuzzer_Buzzer;
         public static SoundDef Dolphus_Rimbuzzer_BuzzerEnd;
-        //public static SoundDef Roof_Start;
 
         static RimBuzzer_SoundDefOf()
         {
