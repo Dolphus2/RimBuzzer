@@ -35,8 +35,6 @@ namespace Dolphus.RimBuzzer.MatchTimer
 
         /// <summary>
         /// Generates a string (format is "hh:mm:ss:f") to represent the time elapsed since the Commencement Time.
-        /// <para/>
-        /// Note that since we are in Framework v3.5, formatting strings does not exist, so we have to construct the string ourselves.
         /// </summary>
         /// <returns>The string representing the time elapsed.</returns>
         public override string ToString() // public, override, returntype, ToString()

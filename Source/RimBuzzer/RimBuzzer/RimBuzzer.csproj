@@ -65,7 +65,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuzzerUnpause\BuzzerSound.cs" />
     <Compile Include="BuzzerUnpause\PostFix_TimeControls_BuzzerButton.cs" />
     <Compile Include="BuzzerUnpause\Buzzer.cs" />
     <Compile Include="HelloWorld.cs" />

@@ -12,7 +12,7 @@ using System.Xml.Linq;
 namespace Dolphus.RimBuzzer
 {
     /// <summary>
-    /// The settings object of this mod. I have chosen to have everything here and give this class a DoSettingsWindowContents method, that is called in the main mod class.
+    /// The settings object of this mod. I have chosen to have everything here and give this class a DoSettingsWindowContents method that is called in the main mod class.
     /// </summary>
     public class RimBuzzer_Settings : ModSettings
     {
@@ -49,22 +49,6 @@ namespace Dolphus.RimBuzzer
         // Useful fields not available in the menu.
         public static List<int> costumColorMinutesIdx => (costumColorMinutes.Count == 0 ? new List<int>() : Tools.argsort(costumColorMinutes));
             
-            
-            //costumColorMinutes.Count == 0 ? new List<int>() : Tools.argsort(costumColorMinutes, out costumColorMinutesIdx);
-        // Maybe c-type array instead, so I have the references
-
-
-
-
-        //// One big section in bottom.
-        //public static int NumberOfColorGradiants = 3; // enum like in healthHediff. // Do three manually because otherwise I have to store them in array, create class and all that. Look at that later maybe.
-        //// Appear on one row. After X minutes, bool flash, Color picker (like in RPG inventory)
-        //public static int GradientMinutes;          public static bool flash;       //public static color
-
-        //// To be iterated upon
-
-
-
         /// <summary>
         /// The part that writes our settings to file. Note that saving is by ref.
         /// </summary>
@@ -211,7 +195,7 @@ namespace Dolphus.RimBuzzer
                 if (Widgets.ButtonText(innerList.GetRect(24), "AddColor".Translate()))
                 {
                     var newColor = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value); // Learn from this. I can make a variable and pass it by reference.
-                                                                                                                            // It is quite important that it is initialized it seems. I have null references somewhere.
+
                     colors.Add(newColor);
                     colorMaterials.Add(MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, newColor));
 
