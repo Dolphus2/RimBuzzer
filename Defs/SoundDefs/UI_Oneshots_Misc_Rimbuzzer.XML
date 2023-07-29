@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
     <SoundDef>
-        <defName>Dolphus_Rimbuzzer_TimerEnd</defName>
-        <maxSimultaneous>1</maxSimultaneous>
+        <defName>RimBuzzer_BuzzerLow</defName>
+        <maxSimultaneous>3</maxSimultaneous>
         <subSounds>
         <li>
             <onCamera>True</onCamera>
             <grains>
             <li Class="AudioGrain_Clip">
-                <clipPath>UI/WhateverRingtoneDaehanChoi</clipPath>
+                <clipPath>UI/RimBuzzer_BuzzerLow</clipPath>
             </li>
             </grains>
             <volumeRange>70~70</volumeRange>
@@ -17,14 +17,14 @@
     </SoundDef>
 
     <SoundDef>
-        <defName>Dolphus_Rimbuzzer_Buzzer</defName>
+        <defName>RimBuzzer_BuzzerHigh</defName>
         <maxSimultaneous>1</maxSimultaneous>
         <subSounds>
         <li>
             <onCamera>True</onCamera>
             <grains>
             <li Class="AudioGrain_Clip">
-                <clipPath>UI/LetterArriveBadUrgentBig</clipPath>
+                <clipPath>UI/RimBuzzer_BuzzerHigh</clipPath>
             </li>
             </grains>
             <volumeRange>70~70</volumeRange>
@@ -33,14 +33,31 @@
     </SoundDef>
 
     <SoundDef>
-        <defName>Dolphus_Rimbuzzer_BuzzerEnd</defName>
+        <defName>RimBuzzer_PlaySound</defName>
         <maxSimultaneous>1</maxSimultaneous>
         <subSounds>
         <li>
             <onCamera>True</onCamera>
             <grains>
             <li Class="AudioGrain_Clip">
-                <clipPath>UI/WhateverRingtoneDaehanChoi</clipPath>
+                <clipPath>UI/RimBuzzer_BuzzerEnd</clipPath>
+            </li>
+            </grains>
+            <volumeRange>70~70</volumeRange>
+        </li>
+        </subSounds>
+    </SoundDef>
+
+    <SoundDef>
+        <defName>RimBuzzer_Whatever_BreakFade</defName>
+        <maxVoices>3</maxVoices>  <!-- Doesn't work grumble grumble -->
+        <maxSimultaneous>3</maxSimultaneous> 
+        <subSounds>
+        <li>
+            <onCamera>True</onCamera>
+            <grains>
+            <li Class="AudioGrain_Clip">
+                <clipPath>UI/RimBuzzer_Whatever_BreakFade</clipPath>
             </li>
             </grains>
             <volumeRange>70~70</volumeRange>

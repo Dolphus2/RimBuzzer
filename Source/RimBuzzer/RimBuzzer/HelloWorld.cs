@@ -13,7 +13,9 @@ namespace Dolphus.RimBuzzer
     {
         static HelloWorld() //our constructor
         {
-            Log.Message("Hello World!"); //Outputs "Hello World!" to the dev console.
+            // Log.Message("Hello World!"); //Outputs "Hello World!" to the dev console.
+
+            // Ahh, good times. How far I have come since I started coding this mod.
         }
     }
 }

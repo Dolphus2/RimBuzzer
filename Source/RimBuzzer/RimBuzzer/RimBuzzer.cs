@@ -107,11 +107,11 @@ namespace Dolphus.RimBuzzer
 
             static RimBuzzer_PostInit()
             {
-                Log.Message("Hello World!");
+                // Log.Message("Hello World!");
                 // IdempotentBeginTimer();
-                Log.Message("colors.Count(): " + RimBuzzer_Settings.customColors.Count().ToString());
-                Log.Message("colorFlash.Count(): " + RimBuzzer_Settings.costumColorPulse.Count().ToString());
-                Log.Message("colorMinutes.Count(): " + RimBuzzer_Settings.costumColorMinutes.Count().ToString());
+                // Log.Message("colors.Count(): " + RimBuzzer_Settings.customColors.Count().ToString());
+                // Log.Message("colorFlash.Count(): " + RimBuzzer_Settings.costumColorPulse.Count().ToString());
+                // Log.Message("colorMinutes.Count(): " + RimBuzzer_Settings.costumColorMinutes.Count().ToString());
             }
         }
 
@@ -127,21 +127,6 @@ namespace Dolphus.RimBuzzer
         //    public static void Postfix()
         //    {
         //        RimBuzzer.IdempotentBeginTimer();
-        //    }
-        //}
-
-
-
-
-
-        //[HarmonyPatch(typeof(TickManager))]
-        //[HarmonyPatch(nameof(TickManager.TogglePaused))]
-        //static class TickManager_TogglePaused_Patch
-        //{
-        //    public static void Postfix(TickManager __instance)
-        //    {
-        //        if (Tools.HasSnapback && __instance.Paused == false)
-        //            Tools.RestoreSnapback();
         //    }
         //}
     }

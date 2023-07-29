@@ -11,20 +11,20 @@ using Verse.Sound;
 namespace Dolphus.RimBuzzer.BuzzerUnpause
 {
     /// <summary>
-    /// Rimworld Count Down Timer, abbreviated as RimWorld CDT.
+    /// A Buzzer class that keeps track of how and how many times to buzz when PlayBuzzer() is called to play the intro buzzer. Time keeping is done using DateTime.Now.
     /// </summary>
     public class Buzzer
     {
         public static bool buzzerActive = false;
         public static DateTime startTime;
-        public static int buzzes; // Just use number iterator instead.
+        public static int buzzes; // Just use number iterator instead an array of bools.
         public static bool nextBuzzIsLast;
 
         public static void PlayBuzzer()
         {
             if (!buzzerActive)
             {
-                Log.Message("Buzzer Activated");
+                // Log.Message("Buzzer Activated");
                 startTime = DateTime.Now;
                 buzzerActive = true;
                 buzzes = 0; // One buzz every second.
@@ -35,15 +35,16 @@ namespace Dolphus.RimBuzzer.BuzzerUnpause
             {
                 if (nextBuzzIsLast)
                 {
-                    SoundDef soundDef = RimBuzzer_SoundDefOf.Dolphus_Rimbuzzer_BuzzerEnd;
+                    // SoundDef soundDef = RimBuzzer_SoundDefOf.RimBuzzer_BuzzerHigh;
+                    SoundDef soundDef = RimBuzzer_SoundDefOf.RimBuzzer_Whatever_BreakFade;
+                    Log.Message(soundDef.subSounds.Count.ToString());
                     soundDef?.PlayOneShotOnCamera();
                     buzzerActive = false; // Reset the buzzer
                     Find.TickManager.CurTimeSpeed = TimeSpeed.Normal;
                 }
                 else
                 {
-                    //SoundDef soundDef = RimBuzzer_SoundDefOf.Dolphus_Rimbuzzer_Buzzer;
-                    SoundDef soundDef = DefDatabase<SoundDef>.GetNamed("LetterArrive_BadUrgentBig");
+                    SoundDef soundDef = RimBuzzer_SoundDefOf.RimBuzzer_BuzzerLow;
                     soundDef?.PlayOneShotOnCamera();
                     buzzes++;
                     if (buzzes >= RimBuzzer_Settings.buzzerLastsSeconds)

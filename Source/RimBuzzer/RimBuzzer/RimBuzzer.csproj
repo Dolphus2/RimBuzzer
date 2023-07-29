@@ -67,7 +67,6 @@
   <ItemGroup>
     <Compile Include="BuzzerUnpause\BuzzerSound.cs" />
     <Compile Include="BuzzerUnpause\PostFix_TimeControls_BuzzerButton.cs" />
-    <Compile Include="BuzzerUnpause\PreFix_TimeControls_BuzzerButton.cs" />
     <Compile Include="BuzzerUnpause\Buzzer.cs" />
     <Compile Include="HelloWorld.cs" />
     <Compile Include="MatchTimer\Alert_MatchTimer.cs" />

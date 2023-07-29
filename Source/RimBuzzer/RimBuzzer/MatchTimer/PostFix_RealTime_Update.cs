@@ -19,10 +19,6 @@ namespace Dolphus.RimBuzzer.MatchTimer
         [HarmonyPostfix] // All these are attributes
         public static void PostFix() // We give it this method called PostFix() with no input arguments. This adds this code to the end of the RealTime class in Verse. 
         {
-            //if (BuzzerUnpause.Buzzer.buzzerActive) // Do not check for RimBuzzer_Settings.buzzerEnabled here so the buzzer always runs its course.
-            //{
-            //    BuzzerUnpause.Buzzer.PlayBuzzer();
-            //}
 
             // The list of exceptions for when the timer shouldn't increase.
             if (Current.Game == null)

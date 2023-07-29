@@ -16,6 +16,9 @@ namespace Dolphus.RimBuzzer.BuzzerUnpause
     [HarmonyPatch("DoTimeControlsGUI", MethodType.Normal)]
     internal class PostFix_TimeControls_BuzzerButton // I will postfix for compatibility and defensive patching.
     {
+        public static readonly Texture2D ButtonHigh = ContentFinder<Texture2D>.Get("UI/ButtonHigh");
+        public static readonly Texture2D ButtonLow = ContentFinder<Texture2D>.Get("UI/ButtonLow");
+
         [HarmonyPriority(Priority.Normal)] // Maybe increase.
         [HarmonyPostfix]
         public static void DoTimeControlsGUI_PostFix(Rect timerRect, Vector2 ___TimeButSize)
@@ -26,14 +29,14 @@ namespace Dolphus.RimBuzzer.BuzzerUnpause
                 rect.xMax = rect.xMin;
                 rect.xMin = rect.xMin - ___TimeButSize.x;
 
-                if (Widgets.ButtonImage(rect, TexButton.SpeedButtonTextures[0]))
+                if (Widgets.ButtonImage(rect, (Buzzer.buzzerActive ? ButtonLow : ButtonHigh))) //TexButton.SpeedButtonTextures[0]
                 {
-                    Buzzer.PlayBuzzer(); // Pass by PostFix_RealTime_Update to make sure the relevant method is called every tick.
+                    Buzzer.PlayBuzzer(); 
                 }
                 if (Buzzer.buzzerActive)
                 {
-                    Buzzer.PlayBuzzer();
-                    GUI.DrawTexture(rect, TexUI.HighlightTex);
+                    Buzzer.PlayBuzzer(); // If the buzzer is active, keep calling this method every tick.
+                    //GUI.DrawTexture(rect, TexUI.HighlightTex);
                 }
             }
         }
