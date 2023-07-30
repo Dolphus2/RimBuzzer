@@ -78,6 +78,7 @@
     <Compile Include="MatchTimer\UPTTAuxiliaryMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RimBuzzer.cs" />
+    <Compile Include="RimBuzzer_MPCompatibility.cs" />
     <Compile Include="RimBuzzer_Settings.cs" />
     <Compile Include="DefOf\RimBuzzer_SoundDefOf.cs" />
     <Compile Include="Tools.cs" />
