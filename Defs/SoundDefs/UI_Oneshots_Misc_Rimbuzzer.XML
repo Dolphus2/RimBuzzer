@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
     <SoundDef>
-        <defName>RimBuzzer_BuzzerLow</defName>
+        <defName>RimBuzzer_BuzzerLow1</defName>
         <maxSimultaneous>3</maxSimultaneous>
         <subSounds>
         <li>
             <onCamera>True</onCamera>
             <grains>
             <li Class="AudioGrain_Clip">
-                <clipPath>UI/RimBuzzer_BuzzerLow</clipPath>
+                <clipPath>UI/RimBuzzer_BuzzerLow1</clipPath> 
+            </li>
+            </grains>
+            <volumeRange>70~70</volumeRange>
+        </li>
+        </subSounds>
+    </SoundDef>
+
+    <!-- Sustainers refuse to layer and is driving me up the wall. I'll instead rotate between these two identical SoundDefs.-->
+    <SoundDef>
+        <defName>RimBuzzer_BuzzerLow2</defName>
+        <maxSimultaneous>3</maxSimultaneous>
+        <subSounds>
+        <li>
+            <onCamera>True</onCamera>
+            <grains>
+            <li Class="AudioGrain_Clip">
+                <clipPath>UI/RimBuzzer_BuzzerLow2</clipPath>
             </li>
             </grains>
             <volumeRange>70~70</volumeRange>
@@ -50,8 +67,8 @@
 
     <SoundDef>
         <defName>RimBuzzer_Whatever_BreakFade</defName>
-        <maxVoices>3</maxVoices>  <!-- Doesn't work grumble grumble -->
-        <maxSimultaneous>3</maxSimultaneous> 
+        <maxVoices>1</maxVoices>  <!-- Doesn't work grumble grumble -->
+        <maxSimultaneous>1</maxSimultaneous> 
         <subSounds>
         <li>
             <onCamera>True</onCamera>

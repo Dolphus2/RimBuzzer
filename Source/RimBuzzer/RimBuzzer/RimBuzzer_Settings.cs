@@ -40,6 +40,7 @@ namespace Dolphus.RimBuzzer
         // Column 2
         public static bool buzzerEnabled = false;
         public static int  buzzerLastsSeconds = 3;
+        public static bool saxBuzzer = false;
 
         public static List<Color> customColors = new List<Color>();
         public static List<Material> customColorMaterials = new List<Material>();
@@ -73,6 +74,7 @@ namespace Dolphus.RimBuzzer
 
             Scribe_Values.Look<bool>(ref buzzerEnabled, "BuzzerEnabled", true); // Enable Buzzer (for X seconds)
             Scribe_Values.Look<int>(ref buzzerLastsSeconds, "BuzzerLastsSeconds", 3);
+            Scribe_Values.Look<bool>(ref saxBuzzer, "saxBuzzer", false);
 
             Scribe_Collections.Look(ref customColors, "customColors");
             //customColors ??= new List<Color>(); // null-coalescing assignment
@@ -109,8 +111,15 @@ namespace Dolphus.RimBuzzer
                     .ToList()));
             }
             list.Gap(standardGap);
-            list.CheckboxLabeled("settings_BetterMessagePlacement".Translate(), ref BetterMessagePlacement, "settings_BetterMessagePlacement_tooltip".Translate());
-            list.Gap(standardGap);
+            if (!ModsConfig.IsActive("mlie.bettermessageplacement_steam")) // Requested by people from the Rimworld PVP server to have a all in one mod solution. I would rather just add it as a dependency and credit it properly though.
+            {
+                // Credit to Dyrewulfe for making the mod and to Mlie for updating it to 1.4. (also in the in-game description)
+                list.CheckboxLabeled("settings_BetterMessagePlacement".Translate(), ref BetterMessagePlacement, "settings_BetterMessagePlacement_tooltip".Translate());
+                list.Gap(standardGap);
+            }
+            else BetterMessagePlacement = true; // (In case they disable the setting and later install the BetterMessagePlacement mod). 
+
+
             bool localUPTTEnabled = UPTTEnabled;
             list.CheckboxLabeled("settings_UPTTIsEnabled".Translate(), ref localUPTTEnabled, "settings_UPTTIsEnabled_tooltip".Translate());
             UPTTEnabled = localUPTTEnabled; // and this is where the property is important. This way, the program reacts when Enabled is set to value.
@@ -158,13 +167,18 @@ namespace Dolphus.RimBuzzer
 
 
             }
-
-
             list.NewColumn();
             list.Gap();
             list.IntegerPlusMinusCheckbox("BuzzerLastsSeconds", ref buzzerLastsSeconds, ref buzzerEnabled, valMin: 0, valMax: 10);
-            if (UPTTEnabled)
+            if (buzzerEnabled)
             {
+                list.Gap(2);
+                //list.CheckboxEnhanced("SaxBuzzer", ref saxBuzzer, "SaxBuzzerTooltip".Translate());
+                list.CheckboxLabeled("SaxBuzzerTitle".Translate(), ref saxBuzzer, "SaxBuzzerTooltip".Translate());
+                GUI.color = Color.white;
+            }
+            if (UPTTEnabled)
+            {   
                 list.GapLine(standardGap);
 
 

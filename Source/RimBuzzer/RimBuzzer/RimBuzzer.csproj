@@ -65,6 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Better Message Placement\Messages_MessagesDoGUI_Patch.cs" />
     <Compile Include="BuzzerUnpause\PostFix_TimeControls_BuzzerButton.cs" />
     <Compile Include="BuzzerUnpause\Buzzer.cs" />
     <Compile Include="HelloWorld.cs" />

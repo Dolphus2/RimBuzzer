@@ -12,12 +12,14 @@ using Verse.Sound;
 
 namespace Dolphus.RimBuzzer.BuzzerUnpause
 {
+    [StaticConstructorOnStartup]
     [HarmonyPatch(typeof(TimeControls))]
     [HarmonyPatch("DoTimeControlsGUI", MethodType.Normal)]
     internal class PostFix_TimeControls_BuzzerButton // I will postfix for compatibility and defensive patching.
     {
         public static readonly Texture2D ButtonHigh = ContentFinder<Texture2D>.Get("UI/ButtonHigh");
         public static readonly Texture2D ButtonLow = ContentFinder<Texture2D>.Get("UI/ButtonLow");
+        public static float tadBitLeft = 3f;
 
         [HarmonyPriority(Priority.Normal)] // Maybe increase.
         [HarmonyPostfix]
@@ -26,16 +28,22 @@ namespace Dolphus.RimBuzzer.BuzzerUnpause
             if (RimBuzzer_Settings.buzzerEnabled)
             {
                 Rect rect = timerRect;
-                rect.xMax = rect.xMin;
-                rect.xMin = rect.xMin - ___TimeButSize.x;
+                rect.xMax = rect.xMin - tadBitLeft;
+                rect.xMin = rect.xMin - ___TimeButSize.x - tadBitLeft;
 
                 if (Widgets.ButtonImage(rect, (Buzzer.buzzerActive ? ButtonLow : ButtonHigh))) //TexButton.SpeedButtonTextures[0]
                 {
-                    Buzzer.PlayBuzzer(); 
+                    if (!RimBuzzer_Settings.saxBuzzer)
+                        Buzzer.PlayBuzzer();
+                    else
+                        Buzzer.PlaySaxBuzzer();
                 }
                 if (Buzzer.buzzerActive)
                 {
-                    Buzzer.PlayBuzzer(); // If the buzzer is active, keep calling this method every tick.
+                    if (!RimBuzzer_Settings.saxBuzzer)
+                        Buzzer.PlayBuzzer(); // If the buzzer is active, keep calling this method every tick.
+                    else
+                        Buzzer.PlaySaxBuzzer(); 
                     //GUI.DrawTexture(rect, TexUI.HighlightTex);
                 }
             }

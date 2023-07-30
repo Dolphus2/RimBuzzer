@@ -24,6 +24,7 @@ namespace Dolphus.RimBuzzer.MatchTimer
                 Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
                 Verse.Steam.SteamDeck.Vibrate(); // Hehe
                 gameHasPaused = true;
+                //Messages.Message($"Game paused after {RimBuzzer_Settings.pauseAfterMinutes} minutes".Translate()); // Maybe add message thing.
             }
         }
 
@@ -35,6 +36,7 @@ namespace Dolphus.RimBuzzer.MatchTimer
                 soundDef?.PlayOneShotOnCamera(); // Verse.Sound.SoundStarter.PlayOneShotOnCamera(soundDef); (The alternative fully qualified statement)
                 Verse.Steam.SteamDeck.Vibrate();
                 soundHasPlayed = true;
+                //Messages.Message($"Played sound after {RimBuzzer_Settings.playSoundAfterMinutes} minutes".Translate()); // Maybe add message thing.
             }
         }
     }

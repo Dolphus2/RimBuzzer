@@ -30,8 +30,12 @@
   <PlaySoundAfterMinutesExplained>Whether or not the game should play a global sound after X minutes.\nThese options are entirely modular.</PlaySoundAfterMinutesExplained>
 
   <BuzzerLastsSecondsTitle>Buzzer lasts X seconds</BuzzerLastsSecondsTitle>
-  <BuzzerLastsSecondsExplained>Wether or not to include a buzzer button in the time controls panel. When clicking the button, the game pauses and plays a global X second long sound buzzer before unpausing. Useful for signalling the start of RimWorld PVP matches.
-    \nNote: When set to 0 seconds, clicking the button just plays the "buzzer end" sound.\nWhen playing RimWorld through Zethrith's Multiplayer, only the host can trigger this button.</BuzzerLastsSecondsExplained>
+  <BuzzerLastsSecondsExplained>Wether or not to include a buzzer button in the time controls panel. When clicking the button, the game pauses and plays a global X second long sound buzzer before unpausing. Useful for signalling the start of RimWorld PVP matches.\nNote: When set to 0 seconds, clicking the button just plays the "buzzer end" sound. When playing RimWorld through Zethrith's Multiplayer, only the host can trigger this button.</BuzzerLastsSecondsExplained>
+  <SaxBuzzerTitle>Sax Buzzer</SaxBuzzerTitle>
+  <SaxBuzzerExplained></SaxBuzzerExplained>
+  <SaxBuzzerTooltip>Replace the buzzer sound with a smooth as hell saxophone lick played by Daehan Choi.\n\nMmmm, I do love me some saxophone. Daehan Choi is one of my sax idols. Show the man some love on Youtube.</SaxBuzzerTooltip>
+
+
   <CustomColors>UPTT Alert Gradient Colors</CustomColors>
 	<AddColor>Add Gradient Color</AddColor>
 	<AddingCustomColors>Color gradients for when the UPTT is displayed as an alert. The colors will overlay the UPTT alert after X minutes and pulse periodically if the option is selected.

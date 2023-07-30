@@ -2,7 +2,7 @@
 <ModMetaData>
     <name>RimBuzzer</name>
     <author>Dolphus</author>
-    <packageId>Dolphus.RimBuzzer.0.1</packageId>
+    <packageId>dolphus.rimbuzzer</packageId>
     <description>A countdown and buzzer intended for Rimworld PVP. Situated in the control panel in the bottom left, clicking this button pauses the game and does a 3 second cound down with an audible buzzer. 
     Useful for when Rimworld PVP teams are rearing to go but don't know when the game is actually starting because they are in different comms channels.</description>
     <supportedVersions>
