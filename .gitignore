@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# My ignored files
+
+
 # User-specific files
 *.rsuser
 *.suo

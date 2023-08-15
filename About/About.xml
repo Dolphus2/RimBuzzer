@@ -23,12 +23,13 @@
 	<description>An unpaused timer and buzzer intended for RimWorld PVP (multiplayer compatibility is currently a work in progress). This mod is very modular and all parts of it can be enabled or disabled on the fly in the mod settings.
 Honestly just take a peek at the mod settings above. They summerize it much better than the text below. 
 Okay then, if you insist...
-[list]
-[*] Rimbuzzer adds a timer that tracks how long the game has been unpaused in real time. The timer can be formatted as a stopwatch or a countdown and displayed by the real time clock or as an alert. If the alert option is chosen, the alert can be displayed with customizable color gradients after certain elapsed times and set to flash periodically. 
-[*] Rimbuzzer also adds a buzzer button by the time controls panel together with a costumizable length countdown. Clicking this button pauses the game and plays an audible buzzer sound every second for the time specified in the options menu. It then unpauses the game and plays a different buzzer sound to mark count down termination. Useful for when Rimworld PVP teams are rearing to go but don't know when the game is actually starting because they are in different comms channels.
-[/list]
 
-If you are interested in RimWorld PVP, check out the matches on [url=https://www.youtube.com/@rimworldpvp] [this youtube channel] or join [https://discord.gg/vxTcSjXhWg] [this discord server].
+Rimbuzzer adds a timer that tracks how long the game has been unpaused in real time. The timer can be formatted as a stopwatch or a countdown and displayed by the real time clock or as an alert. If the alert option is chosen, the alert can be displayed with customizable color gradients after certain elapsed times and set to flash periodically. 
+
+Rimbuzzer also adds a buzzer button by the time controls panel together with a costumizable length countdown. Clicking this button pauses the game and plays an audible buzzer sound every second for the time specified in the options menu. It then unpauses the game and plays a different buzzer sound to mark count down termination. Useful for when Rimworld PVP teams are rearing to go but don't know when the game is actually starting because they are in different comms channels.
+
+If you are interested in RimWorld PVP, check out the matches on [url=https://www.youtube.com/@rimworldpvp] this youtube channel [/url] or join [url=https://discord.gg/vxTcSjXhWg] this discord server. [/url]
+This is also my first mod for anyone interested.
 	</description> 
 </ModMetaData> <!-- [url=https://steamcommunity.com/sharedfiles/filedetails/changelog/2259516339]Last updated 2023-05-01[/url] -->
 <!--

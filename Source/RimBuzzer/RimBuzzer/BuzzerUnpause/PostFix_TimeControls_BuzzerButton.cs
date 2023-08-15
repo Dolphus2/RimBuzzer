@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
-// using Multiplayer.API;
+using Multiplayer.API;
 
 namespace Dolphus.RimBuzzer.BuzzerUnpause
 {
@@ -26,7 +26,7 @@ namespace Dolphus.RimBuzzer.BuzzerUnpause
         [HarmonyPostfix]
         public static void DoTimeControlsGUI_PostFix(Rect timerRect, Vector2 ___TimeButSize)
         {
-            //click(timerRect, ___TimeButSize);
+            
 
             if (RimBuzzer_Settings.buzzerEnabled)
             {
@@ -36,12 +36,13 @@ namespace Dolphus.RimBuzzer.BuzzerUnpause
 
                 if (Widgets.ButtonImage(rect, (Buzzer.buzzerActive ? ButtonLow : ButtonHigh))) //TexButton.SpeedButtonTextures[0]
                 {
-                    if (!RimBuzzer_Settings.saxBuzzer)
-                        Buzzer.PlayBuzzer();
-                    else
-                        Buzzer.PlaySaxBuzzer();
+                    Click(timerRect, ___TimeButSize);
+                    //if (!RimBuzzer_Settings.saxBuzzer)  
+                    //    Buzzer.PlayBuzzer();
+                    //else
+                    //    Buzzer.PlaySaxBuzzer();
                 }
-                if (Buzzer.buzzerActive)
+                if (Buzzer.buzzerActive) 
                 {
                     if (!RimBuzzer_Settings.saxBuzzer)
                         Buzzer.PlayBuzzer(); // If the buzzer is active, keep calling this method every tick.
@@ -51,31 +52,14 @@ namespace Dolphus.RimBuzzer.BuzzerUnpause
                 }
             }
         }
-        //[SyncMethod]
-        //static void click(Rect timerRect, Vector2 ___TimeButSize)
-        //{
-        //    if (RimBuzzer_Settings.buzzerEnabled)
-        //    {
-        //        Rect rect = timerRect;
-        //        rect.xMax = rect.xMin - tadBitLeft;
-        //        rect.xMin = rect.xMin - ___TimeButSize.x - tadBitLeft;
-
-        //        if (Widgets.ButtonImage(rect, (Buzzer.buzzerActive ? ButtonLow : ButtonHigh))) //TexButton.SpeedButtonTextures[0]
-        //        {
-        //            if (!RimBuzzer_Settings.saxBuzzer)
-        //                Buzzer.PlayBuzzer();
-        //            else
-        //                Buzzer.PlaySaxBuzzer();
-        //        }
-        //        if (Buzzer.buzzerActive)
-        //        {
-        //            if (!RimBuzzer_Settings.saxBuzzer)
-        //                Buzzer.PlayBuzzer(); // If the buzzer is active, keep calling this method every tick.
-        //            else
-        //                Buzzer.PlaySaxBuzzer();
-        //            //GUI.DrawTexture(rect, TexUI.HighlightTex);
-        //        }
-        //    }
-        //}
+        [SyncMethod]
+        static void Click(Rect timerRect, Vector2 ___TimeButSize)
+        {
+            Log.Message("ButtonWasClicked");
+            if (!RimBuzzer_Settings.saxBuzzer)
+                Buzzer.PlayBuzzer();
+            else
+                Buzzer.PlaySaxBuzzer();
+        }
     }
 }

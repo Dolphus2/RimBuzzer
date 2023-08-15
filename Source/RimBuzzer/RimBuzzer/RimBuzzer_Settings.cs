@@ -8,6 +8,8 @@ using RimWorld;
 using Verse.AI;
 using UnityEngine.Assertions;
 using System.Xml.Linq;
+using Multiplayer.API;
+using System.Runtime;
 
 namespace Dolphus.RimBuzzer
 {
@@ -94,7 +96,6 @@ namespace Dolphus.RimBuzzer
 
         internal void DoSettingsWindowContents(Rect inRect)
         {
-            // Rect rect;
 
             const float standardGap = 12f;
 

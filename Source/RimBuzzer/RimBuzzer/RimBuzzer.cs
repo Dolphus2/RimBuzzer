@@ -8,7 +8,7 @@ using RimWorld;
 using UnityEngine;
 using HarmonyLib;
 using Dolphus.RimBuzzer.MatchTimer;
-
+using Multiplayer.API;
 
 namespace Dolphus.RimBuzzer
 {
@@ -32,6 +32,35 @@ namespace Dolphus.RimBuzzer
 
         public override void DoSettingsWindowContents(Rect inRect)
         {
+            if (MP.IsInMultiplayer)
+            {
+
+                MP.WatchBegin(); // Let's being watching
+
+                // This is here to set the variable if it changed on other clients
+                // It will update the variable and the logic will stay the same.
+
+                // Maybe watch settings. I don't know if MP even supports different settings among different clients.
+                // MP.Watch(Settings, nameof(RimBuzzer_Settings.pauseAfter));
+                    // I have to add [SyncField] and even then, I am not even sure if it works with a static. Probably easier to say everyone has the same configs.
+
+                //public static bool pauseAfter = false; public static int pauseAfterMinutes = countdownMinutes; // tick a box, then int box appears
+                //public static bool playSoundAfter = false; public static int playSoundAfterMinutes = countdownMinutes;
+                //// Column 2
+                //public static bool buzzerEnabled = false;
+                //public static int buzzerLastsSeconds = 3;
+                //public static bool saxBuzzer = false;
+
+             }
+
+            if (MP.IsInMultiplayer)
+            {
+
+                MP.WatchEnd(); // We are done watching!
+
+            }
+
+
             base.DoSettingsWindowContents(inRect);
             Settings.DoSettingsWindowContents(inRect); // Effectively moves this whole shabang to the Settings class
         }

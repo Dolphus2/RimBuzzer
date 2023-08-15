@@ -8,6 +8,7 @@ using Verse;
 using Verse.Sound;
 using Dolphus.RimBuzzer.Sounds;
 //using Verse.Steam;
+using Multiplayer.API;
 
 namespace Dolphus.RimBuzzer.MatchTimer
 {
@@ -17,6 +18,7 @@ namespace Dolphus.RimBuzzer.MatchTimer
         public static bool gameHasPaused = false;
         public static bool soundHasPlayed = false;
 
+        [SyncMethod]
         public static void PauseGame()
         {
             if ((!gameHasPaused && RimBuzzer_Settings.pauseAfter) && (RimBuzzer.UnPausedTimeTracker.ElapsedTime > TimeSpan.FromMinutes(RimBuzzer_Settings.pauseAfterMinutes))) // Future proof if I add seconds.
@@ -27,7 +29,7 @@ namespace Dolphus.RimBuzzer.MatchTimer
                 //Messages.Message($"Game paused after {RimBuzzer_Settings.pauseAfterMinutes} minutes".Translate()); // Maybe add message thing.
             }
         }
-
+        [SyncMethod]
         public static void PlaySound()
         {
             if ((!soundHasPlayed && RimBuzzer_Settings.playSoundAfter) && (RimBuzzer.UnPausedTimeTracker.ElapsedTime > TimeSpan.FromMinutes(RimBuzzer_Settings.playSoundAfterMinutes)))
